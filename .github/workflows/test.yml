@@ -1,0 +1,18 @@
+name: Tests
+
+on:
+  workflow_dispatch:
+
+jobs:
+  placeholder-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Current state
+        run: |
+          echo "Test workflow scaffold only."
+          echo "Add dotnet test once the solution exists."
+
