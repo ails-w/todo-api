@@ -20,3 +20,6 @@ coverage/
 .DS_Store
 Thumbs.db
 
+# .atl cache (local AI tooling)
+.atl/.skill-registry.cache.json
+

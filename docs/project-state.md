@@ -2,8 +2,8 @@
 
 ## Estado actual
 
-Fase: **1 — Scaffolding (en progreso)**.  
-Solución y proyecto API creados, build exitoso, test de health check pasando.
+Fase: **2 — GET /tasks (completada)**.  
+Modelo de dominio, repositorio, servicio, controller y tests de integración funcionando. 4/4 tests pasando.
 
 ## Qué ya está definido
 
@@ -26,16 +26,25 @@ Solución y proyecto API creados, build exitoso, test de health check pasando.
 - [x] test de health check escrito y pasando (`dotnet test` → 1/1 ✅)
 - [x] runtime ASP.NET Core instalado en el entorno
 
-## Qué falta (Fase 1 — documentación)
+## Qué ya está implementado (Fase 2)
 
-- [x] documentar conceptos aprendidos en `docs/learning/`
-- [x] revisar el código creado y entender su funcionamiento
+- [x] modelo de dominio `TaskItem` (Id Guid, Title, IsCompleted)
+- [x] interfaz `ITaskRepository` (GetAllAsync, GetByIdAsync)
+- [x] `InMemoryTaskRepository` con datos semilla (3 tareas)
+- [x] DTO de salida `TaskResponse` (record inmutable)
+- [x] interfaz `ITaskService`
+- [x] `TaskService` con GetAllAsync y GetByIdAsync + mapeo TaskItem → TaskResponse
+- [x] `TasksController` con GET /api/tasks y GET /api/tasks/{id:guid}
+- [x] DI registrada en Program.cs (Singleton repositorio, Scoped service)
+- [x] endpoint `/weatherforecast` del template eliminado
+- [x] tests de integración: 200 + lista, 200 por ID, 404 inexistente
+- [x] `dotnet test` → 4/4 ✅
 
 ## Próximas fases
 
 | Fase | Estado |
 |---|---|
-| 2 — GET /tasks | Pendiente |
+| 2 — GET /tasks | ✅ Completada |
 | 3 — POST /tasks | Pendiente |
 | 4 — PUT /tasks | Pendiente |
 | 5 — DELETE /tasks | Pendiente |
@@ -48,13 +57,14 @@ Solución y proyecto API creados, build exitoso, test de health check pasando.
 
 No hay bloqueos técnicos en este momento.
 
-## Última sesión (2026-06-06, sesión 2)
+## Última sesión (2026-06-07, sesión 3)
 
-- se creó la solución y el proyecto API
-- se escribió el primer test de integración con WebApplicationFactory
-- se verificó que `dotnet build` y `dotnet test` pasan
-- se instaló el runtime ASP.NET Core faltante en Arch Linux
+- se implementó la Fase 2 completa: modelo, repositorio, servicio, controller, DI
+- se eliminó el endpoint `/weatherforecast` del template original
+- se actualizó el health check a GET /api/tasks
+- se crearon 3 tests de integración para los endpoints GET
+- `dotnet build` y `dotnet test` pasan (4/4 ✅)
 
 ## Siguiente paso
 
-Arrancar Fase 2 (GET /tasks).
+Arrancar Fase 3 (POST /tasks).

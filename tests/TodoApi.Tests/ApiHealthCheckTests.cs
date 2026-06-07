@@ -1,3 +1,4 @@
+using System.Net;
 using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace TodoApi.Tests;
@@ -9,19 +10,16 @@ namespace TodoApi.Tests;
 public class ApiHealthCheckTests
 {
     [Fact]
-    public async Task Get_WeatherForecast_Returns_200_OK()
+    public async Task Get_ApiTasks_Returns_200_OK()
     {
         // Arrange
         await using var factory = new WebApplicationFactory<Program>();
         using var client = factory.CreateClient();
 
         // Act
-        var response = await client.GetAsync("/weatherforecast");
+        var response = await client.GetAsync("/api/tasks");
 
         // Assert
-        Assert.Equal(
-            expected: System.Net.HttpStatusCode.OK,
-            actual: response.StatusCode
-        );
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 }
