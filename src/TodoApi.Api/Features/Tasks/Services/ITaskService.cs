@@ -10,4 +10,5 @@ public interface ITaskService
 {
     Task<List<TaskResponse>> GetAllAsync();
     Task<TaskResponse?> GetByIdAsync(Guid id);
+    Task<TaskResponse> CreateAsync(CreateTaskRequest request);
 }

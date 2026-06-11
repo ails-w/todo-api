@@ -30,6 +30,25 @@ public record TaskResponse(Guid Id, string Title, bool IsCompleted);
 - El **DTO** (`TaskResponse`) es el contrato público. Una vez que los clientes dependen de él, cambiarlo es más costoso.
 - Si en el futuro agregás `CreatedAt` al dominio pero no querés exponerlo, el DTO te protege: simplemente no lo mapeás.
 
+## Validación en DTOs de entrada
+
+Los DTOs de entrada pueden declarar reglas de validación con **Data Annotations**:
+
+```csharp
+public record CreateTaskRequest
+{
+    [Required(ErrorMessage = "El título es obligatorio.")]
+    [StringLength(200, MinimumLength = 1, ErrorMessage = "El título debe tener entre 1 y 200 caracteres.")]
+    public string Title { get; init; } = string.Empty;
+
+    public bool IsCompleted { get; init; }
+}
+```
+
+Con `[ApiController]`, ASP.NET Core valida automáticamente el DTO al recibirlo y devuelve `400 Bad Request` si falla. No necesitas escribir `if (!ModelState.IsValid)`.
+
+Ver más en `docs/learning/validation.md`.
+
 ## Record vs Class para DTOs
 
 Usamos `record` en vez de `class` porque:

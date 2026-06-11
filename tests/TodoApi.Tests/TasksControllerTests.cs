@@ -7,42 +7,95 @@ namespace TodoApi.Tests;
 
 /// <summary>
 /// Tests de integración para el controller TasksController.
-/// Verifican el comportamiento completo: HTTP → routing → controller → service → repository.
+/// Verifican el comportamiento completo: HTTP -> routing -> controller -> service -> repository.
+/// Ordenados por flujo TDD: primero los tests del feature nuevo (POST), luego los existentes (GET).
 /// </summary>
 public class TasksControllerTests
 {
+    // ======================================================================
+    // POST /api/tasks — tests escritos primero (TDD)
+    // ======================================================================
+
     /// <summary>
-    /// GET /api/tasks → 200 OK + lista JSON no vacía.
-    /// Verifica que el endpoint devuelve las tareas semilla del repositorio.
+    /// [TEST] POST válido -> 201 Created + Location header + tarea creada.
+    /// </summary>
+    [Fact]
+    public async Task Post_Task_Valid_Returns_201_Created_With_Location()
+    {
+        // Arrange
+        await using var factory = new WebApplicationFactory<Program>();
+        using var client = factory.CreateClient();
+        var request = new CreateTaskRequest { Title = "Nueva tarea de test", IsCompleted = false };
+
+        // Act
+        var response = await client.PostAsJsonAsync("/api/tasks", request);
+
+        // Assert: 201 Created
+        Assert.Equal(HttpStatusCode.Created, response.StatusCode);
+
+        // Assert: Location header presente con la URL de la tarea creada
+        Assert.NotNull(response.Headers.Location);
+        var locationPath = response.Headers.Location.ToString();
+        Assert.Contains("/api/tasks/", locationPath, StringComparison.OrdinalIgnoreCase);
+
+        // Assert: body contiene la tarea creada con ID asignado
+        var createdTask = await response.Content.ReadFromJsonAsync<TaskResponse>();
+        Assert.NotNull(createdTask);
+        Assert.Equal(request.Title, createdTask.Title);
+        Assert.Equal(request.IsCompleted, createdTask.IsCompleted);
+        Assert.NotEqual(Guid.Empty, createdTask.Id);
+
+        // Assert: realmente se guardó (GET por ID devuelve la tarea)
+        var getResponse = await client.GetAsync(locationPath);
+        Assert.Equal(HttpStatusCode.OK, getResponse.StatusCode);
+    }
+
+    /// <summary>
+    /// [TEST] POST inválido (Title vacío) -> 400 Bad Request.
+    /// </summary>
+    [Fact]
+    public async Task Post_Task_Invalid_Returns_400_BadRequest()
+    {
+        // Arrange
+        await using var factory = new WebApplicationFactory<Program>();
+        using var client = factory.CreateClient();
+        var request = new CreateTaskRequest { Title = "", IsCompleted = false };
+
+        // Act
+        var response = await client.PostAsJsonAsync("/api/tasks", request);
+
+        // Assert: 400 Bad Request
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+    }
+
+    // ======================================================================
+    // GET /api/tasks — tests heredados de Fase 2
+    // ======================================================================
+
+    /// <summary>
+    /// GET /api/tasks -> 200 OK + lista JSON no vacía.
     /// </summary>
     [Fact]
     public async Task Get_AllTasks_Returns_200_OK_With_List()
     {
-        // Arrange: levantar la API en memoria
         await using var factory = new WebApplicationFactory<Program>();
         using var client = factory.CreateClient();
 
-        // Act: disparar GET /api/tasks
         var response = await client.GetAsync("/api/tasks");
 
-        // Assert: 200 OK
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
-        // Assert: el body se deserializa como List<TaskResponse> y no está vacío
         var tasks = await response.Content.ReadFromJsonAsync<List<TaskResponse>>();
         Assert.NotNull(tasks);
         Assert.NotEmpty(tasks);
     }
 
     /// <summary>
-    /// GET /api/tasks/{id} con ID existente → 200 OK + tarea con ese ID.
-    /// Primero obtiene todas las tareas para conseguir un ID real,
-    /// luego pide esa tarea por ID.
+    /// GET /api/tasks/{id} con ID existente -> 200 OK + tarea con ese ID.
     /// </summary>
     [Fact]
     public async Task Get_TaskById_Existing_Returns_200_OK_With_Task()
     {
-        // Arrange: conseguir un ID que existe en las tareas semilla
         await using var factory = new WebApplicationFactory<Program>();
         using var client = factory.CreateClient();
 
@@ -50,34 +103,27 @@ public class TasksControllerTests
         var allTasks = await allResponse.Content.ReadFromJsonAsync<List<TaskResponse>>();
         var existingId = allTasks!.First().Id;
 
-        // Act: GET /api/tasks/{existingId}
         var response = await client.GetAsync($"/api/tasks/{existingId}");
 
-        // Assert: 200 OK
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
-        // Assert: la tarea devuelta tiene el ID que pedimos
         var task = await response.Content.ReadFromJsonAsync<TaskResponse>();
         Assert.NotNull(task);
         Assert.Equal(existingId, task.Id);
     }
 
     /// <summary>
-    /// GET /api/tasks/{id} con ID inexistente → 404 NotFound.
-    /// Usa un Guid aleatorio que no puede existir en el repositorio.
+    /// GET /api/tasks/{id} con ID inexistente -> 404 NotFound.
     /// </summary>
     [Fact]
     public async Task Get_TaskById_NonExisting_Returns_404_NotFound()
     {
-        // Arrange: ID que no existe
         await using var factory = new WebApplicationFactory<Program>();
         using var client = factory.CreateClient();
         var nonExistingId = Guid.NewGuid();
 
-        // Act: GET /api/tasks/{nonExistingId}
         var response = await client.GetAsync($"/api/tasks/{nonExistingId}");
 
-        // Assert: 404
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
     }
 }

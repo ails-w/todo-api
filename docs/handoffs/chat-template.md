@@ -1,46 +1,44 @@
 # Handoff — Estado actual del proyecto
 
-> Última actualización: 2026-06-07 — Sesión 3
+> Última actualización: 2026-06-11 — Sesión 4
 
 ## Objetivo actual
 
-Completar la **Fase 2** del proyecto: implementar el feature Tasks con endpoints GET.  
-✅ **Fase 2 completada.** Próximo objetivo: arrancar **Fase 3 — POST /tasks**.
+Completar la **Fase 3** del proyecto: implementar **POST /tasks**.  
+✅ **Fase 3 completada.** Próximo objetivo: arrancar **Fase 4 — PUT /tasks/{id}**.
 
 ## Estado actual
 
 ### ✅ Completado hasta ahora
 
-- [x] Fase 0: documentación base, arquitectura, checklists
-- [x] Fase 1: scaffolding completo
-  - Solución .NET (`TodoApi.slnx`) con proyecto API y de tests
-  - `dotnet build` y `dotnet test` pasando
-  - Runtime ASP.NET Core instalado en Arch Linux
-  - Conceptos documentados en `docs/learning/`
+- [x] **Fase 0**: documentación base, arquitectura, checklists
+- [x] **Fase 1**: scaffolding completo (solución, proyecto API, tests, build, health check)
 - [x] **Fase 2: GET /tasks** — completa
-  - Modelo `TaskItem` (`Features/Tasks/Domain/`)
-  - Interfaz `ITaskRepository` (`Features/Tasks/Contracts/`)
-  - `InMemoryTaskRepository` con 3 tareas semilla (`Infrastructure/InMemory/`)
-  - DTO `TaskResponse` como record (`Features/Tasks/Dtos/`)
-  - Interfaz `ITaskService` y `TaskService` con GetAllAsync + GetByIdAsync (`Features/Tasks/Services/`)
-  - `TasksController` con GET /api/tasks y GET /api/tasks/{id:guid} (`Controllers/`)
-  - DI registrada en Program.cs
-  - Tests de integración: 200 + lista, 200 por ID, 404 inexistente
-  - `dotnet test` → 4/4 ✅
+  - Modelo `TaskItem`, `ITaskRepository`, `InMemoryTaskRepository`
+  - DTO `TaskResponse`, `ITaskService` + `TaskService`
+  - `TasksController` con GET /api/tasks y GET /api/tasks/{id:guid}
+  - DI registrada, tests de integración, 4/4 ✅
+- [x] **Fase 3: POST /tasks** — completa
+  - `CreateTaskRequest` con `[Required]` y `[StringLength]`
+  - `CreateAsync` en repositorio, servicio y controller
+  - `POST /api/tasks` con 201 Created + Location header
+  - Tests: POST válido → 201, POST inválido → 400
+  - `dotnet test` → 6/6 ✅
+  - Checklist reestructurado: tests primero (TDD)
 
 ### 🔄 En progreso
 
-- Nada — Fase 2 completada, Fase 3 lista para arrancar
+- Nada — Fase 3 completada, Fase 4 lista para arrancar
 
 ### ⏳ Próxima tarea
 
-**Fase 3 — POST /tasks.** Empezar por:
+**Fase 4 — PUT /tasks/{id}.** Empezar por:
 
-1. Tarea 3.1: Crear `CreateTaskRequest` (DTO de entrada con validación)
-2. Tarea 3.2: Agregar validación con anotaciones (`[Required]`, etc.)
-3. Seguir secuencialmente hasta tarea 3.10
+1. **[TEST]** PUT válido → 200 + tarea actualizada (escribir test → falla)
+2. **[TEST]** PUT inexistente → 404 (escribir test → falla)
+3. **[TEST]** PUT inválido → 400 (escribir test → falla)
 
-El orden de las tareas está en `docs/checklists/project-phases.md` (Fase 3).
+El orden de las tareas está en `docs/checklists/project-phases.md` (Fase 4).
 
 ## Archivos que se deben leer primero
 
@@ -49,15 +47,18 @@ El orden de las tareas está en `docs/checklists/project-phases.md` (Fase 3).
 3. `docs/project-state.md`
 4. `docs/architecture/0001-architecture.md`
 5. `docs/handoffs/chat-template.md` (este archivo)
-6. `docs/checklists/project-phases.md` (para ver la lista de tareas de Fase 3)
+6. `docs/checklists/project-phases.md` (Fase 4)
 7. `docs/learning/testing.md` (patrón de tests)
+8. `docs/learning/validation.md` (Data Annotations)
 
 Luego leer los archivos específicos para la implementación:
 - `src/TodoApi.Api/Program.cs`
 - `src/TodoApi.Api/Controllers/TasksController.cs`
+- `src/TodoApi.Api/Features/Tasks/Contracts/ITaskRepository.cs`
+- `src/TodoApi.Api/Infrastructure/InMemory/InMemoryTaskRepository.cs`
 - `src/TodoApi.Api/Features/Tasks/Services/ITaskService.cs`
 - `src/TodoApi.Api/Features/Tasks/Services/TaskService.cs`
-- `src/TodoApi.Api/Infrastructure/InMemory/InMemoryTaskRepository.cs`
+- `src/TodoApi.Api/Features/Tasks/Dtos/CreateTaskRequest.cs`
 - `tests/TodoApi.Tests/TasksControllerTests.cs`
 
 ## Decisiones ya tomadas
@@ -66,18 +67,20 @@ Luego leer los archivos específicos para la implementación:
 |---|---|
 | API simple con feature-first | `docs/architecture/0001-architecture.md` |
 | Almacenamiento en memoria (InMemory) | `docs/architecture/0001-architecture.md` |
-| TDD estricto: escribir test antes del código | Regla de trabajo |
+| TDD estricto: test antes del código | Regla de trabajo |
 | Tests de integración con WebApplicationFactory | `docs/learning/testing.md` |
 | Formato .slnx (default de .NET 10) | — |
 | Rama `dev` para desarrollo, PRs a `main` | — |
 | Guid como Id del modelo de dominio | `TaskItem.cs` |
-| DTOs como records inmutables | `TaskResponse.cs` |
+| DTOs como records inmutables (`init`) | `TaskResponse.cs`, `CreateTaskRequest.cs` |
+| Validación declarativa con Data Annotations | `CreateTaskRequest.cs` |
 | Singleton para repositorio en memoria | `Program.cs` |
 | Scoped para servicios de aplicación | `Program.cs` |
+| `CreatedAtAction` para 201 + Location | `TasksController.cs` |
 
 ## Qué NO debe hacer esta sesión
 
-- NO implementar PUT, DELETE (son Fase 4, 5)
+- NO implementar DELETE (es Fase 5)
 - NO tocar middleware de errores (Fase 7)
 - NO modificar workflows de CI/CD (Fase 8)
 - NO instalar paquetes NuGet sin consultar

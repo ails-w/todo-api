@@ -81,18 +81,18 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 
 ---
 
-## Fase 3 — Feature Tasks: POST /tasks (crear tarea)
+## Fase 3 — POST /tasks
 
-- [ ] **3.1** Crear `CreateTaskRequest` (DTO de entrada con validación)
-- [ ] **3.2** Agregar validación con anotaciones (`[Required]`, etc.)
-- [ ] **3.3** Agregar `CreateAsync` a `ITaskRepository`
-- [ ] **3.4** Implementar `CreateAsync` en `InMemoryTaskRepository`
-- [ ] **3.5** Agregar `CreateAsync` a `TaskService` (mapeo DTO → dominio)
-- [ ] **3.6** Agregar `POST /api/tasks` al controller
-- [ ] **3.7** **Prueba**: POST válido → 201 Created + Location header
-- [ ] **3.8** **Prueba**: POST inválido → 400 Bad Request
-- [ ] **3.9** Documentar conceptos en `docs/learning/`
-- [ ] **3.10** Actualizar `docs/progress/` y `docs/project-state.md`
+- [x] **[TEST]** POST válido → 201 + Location (escribir test → falla)
+- [x] **[TEST]** POST inválido → 400 (escribir test → falla)
+- [x] Crear `CreateTaskRequest` con validación
+- [x] Agregar `CreateAsync` a `ITaskRepository`
+- [x] Implementar `CreateAsync` en `InMemoryTaskRepository`
+- [x] Agregar `CreateAsync` a `ITaskService` + `TaskService`
+- [x] Agregar `POST /api/tasks` al controller
+- [x] → Tests GREEN
+- [x] Documentar conceptos en `docs/learning/`
+- [x] Actualizar `docs/progress/` y `docs/project-state.md`
 
 ### Conceptos a aprender
 
@@ -103,18 +103,19 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 
 ---
 
-## Fase 4 — Feature Tasks: PUT /tasks/{id} (actualizar tarea)
+## Fase 4 — PUT /tasks/{id}
 
-- [ ] **4.1** Crear `UpdateTaskRequest` con validación
-- [ ] **4.2** Agregar `UpdateAsync` a `ITaskRepository`
-- [ ] **4.3** Implementar `UpdateAsync` en `InMemoryTaskRepository`
-- [ ] **4.4** Agregar `UpdateAsync` a `TaskService`
-- [ ] **4.5** Agregar `PUT /api/tasks/{id}` al controller
-- [ ] **4.6** **Prueba**: PUT válido → 200 + tarea actualizada
-- [ ] **4.7** **Prueba**: PUT inexistente → 404
-- [ ] **4.8** **Prueba**: PUT inválido → 400
-- [ ] **4.9** Documentar conceptos en `docs/learning/`
-- [ ] **4.10** Actualizar `docs/progress/` y `docs/project-state.md`
+- [ ] **[TEST]** PUT válido → 200 + tarea actualizada (escribir test → falla)
+- [ ] **[TEST]** PUT inexistente → 404 (escribir test → falla)
+- [ ] **[TEST]** PUT inválido → 400 (escribir test → falla)
+- [ ] Crear `UpdateTaskRequest` con validación
+- [ ] Agregar `UpdateAsync` a `ITaskRepository`
+- [ ] Implementar `UpdateAsync` en `InMemoryTaskRepository`
+- [ ] Agregar `UpdateAsync` a `ITaskService`
+- [ ] Agregar `PUT /api/tasks/{id}` al controller
+- [ ] → Tests GREEN
+- [ ] Documentar conceptos en `docs/learning/`
+- [ ] Actualizar `docs/progress/` y `docs/project-state.md`
 
 ### Conceptos a aprender
 
@@ -124,16 +125,17 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 
 ---
 
-## Fase 5 — Feature Tasks: DELETE /tasks/{id} (eliminar tarea)
+## Fase 5 — DELETE /tasks/{id}
 
-- [ ] **5.1** Agregar `DeleteAsync` a `ITaskRepository`
-- [ ] **5.2** Implementar `DeleteAsync` en `InMemoryTaskRepository`
-- [ ] **5.3** Agregar `DeleteAsync` a `TaskService`
-- [ ] **5.4** Agregar `DELETE /api/tasks/{id}` al controller
-- [ ] **5.5** **Prueba**: DELETE existente → 204 NoContent
-- [ ] **5.6** **Prueba**: DELETE inexistente → 404
-- [ ] **5.7** Documentar conceptos en `docs/learning/`
-- [ ] **5.8** Actualizar `docs/progress/` y `docs/project-state.md`
+- [ ] **[TEST]** DELETE existente → 204 NoContent (escribir test → falla)
+- [ ] **[TEST]** DELETE inexistente → 404 (escribir test → falla)
+- [ ] Agregar `DeleteAsync` a `ITaskRepository`
+- [ ] Implementar `DeleteAsync` en `InMemoryTaskRepository`
+- [ ] Agregar `DeleteAsync` a `ITaskService`
+- [ ] Agregar `DELETE /api/tasks/{id}` al controller
+- [ ] → Tests GREEN
+- [ ] Documentar conceptos en `docs/learning/`
+- [ ] Actualizar `docs/progress/` y `docs/project-state.md`
 
 ### Conceptos a aprender
 
@@ -145,12 +147,12 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 
 ## Fase 6 — Swagger / OpenAPI
 
-- [ ] **6.1** Explorar el Swagger incluido en el template
-- [ ] **6.2** Personalizar título y descripción de la API
-- [ ] **6.3** Verificar schemas de DTOs en Swagger UI
-- [ ] **6.4** Probar todos los endpoints desde Swagger UI
-- [ ] **6.5** Documentar conceptos en `docs/learning/`
-- [ ] **6.6** Actualizar `docs/progress/` y `docs/project-state.md`
+- [ ] **[TEST]** Explorar Swagger UI y verificar endpoints listados
+- [ ] Personalizar título y descripción de la API
+- [ ] Verificar schemas de DTOs en Swagger UI
+- [ ] Probar todos los endpoints desde Swagger UI
+- [ ] Documentar conceptos en `docs/learning/`
+- [ ] Actualizar `docs/progress/` y `docs/project-state.md`
 
 ### Conceptos a aprender
 
@@ -162,14 +164,15 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 
 ## Fase 7 — Error handling global
 
-- [ ] **7.1** Crear `ExceptionMiddleware`
-- [ ] **7.2** Mapear `KeyNotFoundException` → 404
-- [ ] **7.3** Capturar errores no controlados → 500 genérico (sin stack trace)
-- [ ] **7.4** Registrar middleware en el pipeline (Program.cs)
-- [ ] **7.5** **Prueba**: ruta inexistente → 404
-- [ ] **7.6** **Prueba**: error interno → 500 (sin datos sensibles)
-- [ ] **7.7** Documentar conceptos en `docs/learning/`
-- [ ] **7.8** Actualizar `docs/progress/` y `docs/project-state.md`
+- [ ] **[TEST]** Ruta inexistente → 404 (escribir test → falla)
+- [ ] **[TEST]** Error interno → 500 sin datos sensibles (escribir test → falla)
+- [ ] Crear `ExceptionMiddleware`
+- [ ] Mapear `KeyNotFoundException` → 404
+- [ ] Capturar errores no controlados → 500 genérico (sin stack trace)
+- [ ] Registrar middleware en el pipeline (Program.cs)
+- [ ] → Tests GREEN
+- [ ] Documentar conceptos en `docs/learning/`
+- [ ] Actualizar `docs/progress/` y `docs/project-state.md`
 
 ### Conceptos a aprender
 
@@ -181,10 +184,11 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 
 ## Fase 8 — CI/CD real
 
-- [ ] **8.1** Reemplazar `ci.yml` placeholder con build real en push y PR
-- [ ] **8.2** Reemplazar `test.yml` placeholder con `dotnet test`
-- [ ] **8.3** Verificar que los workflows corren en GitHub
-- [ ] **8.4** Actualizar `docs/progress/` y `docs/project-state.md`
+- [ ] Reemplazar `ci.yml` placeholder con build real en push y PR
+- [ ] Reemplazar `test.yml` placeholder con `dotnet test`
+- [ ] **[TEST]** Verificar que los workflows corren en GitHub
+- [ ] Documentar conceptos en `docs/learning/`
+- [ ] Actualizar `docs/progress/` y `docs/project-state.md`
 
 ### Conceptos a aprender
 
@@ -196,11 +200,11 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 
 ## Fase 9 — Cierre y documentación final
 
-- [ ] **9.1** Revisar que todas las fases estén completas
-- [ ] **9.2** Actualizar `docs/project-state.md` con resumen final
-- [ ] **9.3** Documentar último progreso en `docs/progress/`
-- [ ] **9.4** Revisar `docs/learning/` — documentar conceptos pendientes
-- [ ] **9.5** Dejar handoff listo para próxima etapa (si aplica)
+- [ ] Revisar que todas las fases estén completas
+- [ ] Actualizar `docs/project-state.md` con resumen final
+- [ ] Documentar último progreso en `docs/progress/`
+- [ ] Revisar `docs/learning/` — documentar conceptos pendientes
+- [ ] Dejar handoff listo para próxima etapa (si aplica)
 
 ---
 
@@ -211,12 +215,12 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 | 0 — Fundaciones | 5 | ✅ |
 | 1 — Scaffolding | 10 + docs | ✅ |
 | 2 — GET /tasks | 14 | ✅ |
-| 3 — POST /tasks | 10 | ⏳ |
-| 4 — PUT /tasks | 10 | ⏳ |
-| 5 — DELETE /tasks | 8 | ⏳ |
+| 3 — POST /tasks | 10 | ✅ |
+| 4 — PUT /tasks | 11 | ⏳ |
+| 5 — DELETE /tasks | 9 | ⏳ |
 | 6 — Swagger | 6 | ⏳ |
-| 7 — Error handling | 8 | ⏳ |
-| 8 — CI/CD | 4 | ⏳ |
+| 7 — Error handling | 9 | ⏳ |
+| 8 — CI/CD | 5 | ⏳ |
 | 9 — Cierre | 5 | ⏳ |
 
 ---

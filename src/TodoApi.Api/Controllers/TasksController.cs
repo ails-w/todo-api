@@ -29,6 +29,17 @@ public class TasksController : ControllerBase
     }
 
     /// <summary>
+    /// POST /api/tasks — crea una nueva tarea.
+    /// Devuelve 201 Created con Location header y la tarea creada.
+    /// </summary>
+    [HttpPost]
+    public async Task<ActionResult<TaskResponse>> Create([FromBody] CreateTaskRequest request)
+    {
+        var task = await _taskService.CreateAsync(request);
+        return CreatedAtAction(nameof(GetById), new { id = task.Id }, task);
+    }
+
+    /// <summary>
     /// GET /api/tasks/{id} — devuelve una tarea por ID.
     /// 404 si no existe.
     /// </summary>

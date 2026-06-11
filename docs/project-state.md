@@ -2,8 +2,8 @@
 
 ## Estado actual
 
-Fase: **2 — GET /tasks (completada)**.  
-Modelo de dominio, repositorio, servicio, controller y tests de integración funcionando. 4/4 tests pasando.
+Fase: **3 — POST /tasks (completada)**.  
+DTO de entrada, validación con Data Annotations, repositorio, servicio, controller y tests de integración funcionando. 6/6 tests pasando.
 
 ## Qué ya está definido
 
@@ -13,7 +13,7 @@ Modelo de dominio, repositorio, servicio, controller y tests de integración fun
 - [x] la estrategia de documentación para trabajo multi-chat
 - [x] la decisión de arquitectura (API simple con feature-first)
 - [x] los checklists operativos (start-session, implementation, review, before-merge, close-session)
-- [x] el checklist general de fases del proyecto
+- [x] el checklist general de fases del proyecto (reestructurado con tests primero)
 
 ## Qué ya está implementado (Fase 1)
 
@@ -40,12 +40,23 @@ Modelo de dominio, repositorio, servicio, controller y tests de integración fun
 - [x] tests de integración: 200 + lista, 200 por ID, 404 inexistente
 - [x] `dotnet test` → 4/4 ✅
 
+## Qué ya está implementado (Fase 3)
+
+- [x] `CreateTaskRequest` (DTO de entrada con `[Required]` y `[StringLength]`)
+- [x] `CreateAsync` en `ITaskRepository`
+- [x] `CreateAsync` en `InMemoryTaskRepository` (asigna Guid automático)
+- [x] `CreateAsync` en `ITaskService` + `TaskService` (mapeo CreateTaskRequest → TaskItem → TaskResponse)
+- [x] `POST /api/tasks` en `TasksController` (201 Created + Location header)
+- [x] tests: POST válido → 201, POST inválido → 400
+- [x] documentación de conceptos: validation.md, http-methods.md actualizado
+- [x] `dotnet test` → 6/6 ✅
+
 ## Próximas fases
 
 | Fase | Estado |
 |---|---|
 | 2 — GET /tasks | ✅ Completada |
-| 3 — POST /tasks | Pendiente |
+| 3 — POST /tasks | ✅ Completada |
 | 4 — PUT /tasks | Pendiente |
 | 5 — DELETE /tasks | Pendiente |
 | 6 — Swagger | Pendiente |
@@ -57,14 +68,15 @@ Modelo de dominio, repositorio, servicio, controller y tests de integración fun
 
 No hay bloqueos técnicos en este momento.
 
-## Última sesión (2026-06-07, sesión 3)
+## Última sesión (2026-06-11, sesión 4)
 
-- se implementó la Fase 2 completa: modelo, repositorio, servicio, controller, DI
-- se eliminó el endpoint `/weatherforecast` del template original
-- se actualizó el health check a GET /api/tasks
-- se crearon 3 tests de integración para los endpoints GET
-- `dotnet build` y `dotnet test` pasan (4/4 ✅)
+- se implementó la Fase 3 completa: CreateTaskRequest, validación, CreateAsync en repositorio/servicio/controller
+- se escribieron los tests primero (TDD estricto)
+- se reestructuró el checklist de fases (tests primero)
+- se documentaron Data Annotations en `docs/learning/validation.md`
+- se actualizó `docs/learning/http-methods.md` con 201 Created y POST
+- `dotnet build` y `dotnet test` pasan (6/6 ✅)
 
 ## Siguiente paso
 
-Arrancar Fase 3 (POST /tasks).
+Arrancar Fase 4 (PUT /tasks/{id}).

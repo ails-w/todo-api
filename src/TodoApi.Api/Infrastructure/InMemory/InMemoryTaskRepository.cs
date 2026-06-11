@@ -26,4 +26,11 @@ public class InMemoryTaskRepository : ITaskRepository
         var task = _tasks.FirstOrDefault(t => t.Id == id);
         return Task.FromResult(task);
     }
+
+    public Task<TaskItem> CreateAsync(TaskItem task)
+    {
+        task.Id = Guid.NewGuid();
+        _tasks.Add(task);
+        return Task.FromResult(task);
+    }
 }

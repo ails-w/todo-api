@@ -31,4 +31,17 @@ public class TaskService : ITaskService
             ? null
             : new TaskResponse(task.Id, task.Title, task.IsCompleted);
     }
+
+    public async Task<TaskResponse> CreateAsync(CreateTaskRequest request)
+    {
+        var task = new Domain.TaskItem
+        {
+            Title = request.Title,
+            IsCompleted = request.IsCompleted
+        };
+
+        var created = await _repository.CreateAsync(task);
+
+        return new TaskResponse(created.Id, created.Title, created.IsCompleted);
+    }
 }
