@@ -1,0 +1,11 @@
+<Project>
+
+  <PropertyGroup>
+    <!-- Enforce code style rules during build (IDE* diagnostics) -->
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <!-- Enable .NET analyzer rules (CA* diagnostics) -->
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+  </PropertyGroup>
+
+</Project>
