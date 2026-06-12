@@ -44,4 +44,19 @@ public class TaskService : ITaskService
 
         return new TaskResponse(created.Id, created.Title, created.IsCompleted);
     }
+
+    public async Task<TaskResponse?> UpdateAsync(Guid id, UpdateTaskRequest request)
+    {
+        var task = new Domain.TaskItem
+        {
+            Title = request.Title,
+            IsCompleted = request.IsCompleted
+        };
+
+        var updated = await _repository.UpdateAsync(id, task);
+
+        return updated is null
+            ? null
+            : new TaskResponse(updated.Id, updated.Title, updated.IsCompleted);
+    }
 }

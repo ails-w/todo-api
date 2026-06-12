@@ -40,6 +40,21 @@ public class TasksController : ControllerBase
     }
 
     /// <summary>
+    /// PUT /api/tasks/{id} — actualiza una tarea existente.
+    /// 200 OK con la tarea actualizada, 404 si no existe.
+    /// </summary>
+    [HttpPut("{id:guid}")]
+    public async Task<ActionResult<TaskResponse>> Update(Guid id, [FromBody] UpdateTaskRequest request)
+    {
+        var task = await _taskService.UpdateAsync(id, request);
+
+        if (task is null)
+            return NotFound();
+
+        return Ok(task);
+    }
+
+    /// <summary>
     /// GET /api/tasks/{id} — devuelve una tarea por ID.
     /// 404 si no existe.
     /// </summary>

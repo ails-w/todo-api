@@ -1,11 +1,11 @@
 # Handoff — Estado actual del proyecto
 
-> Última actualización: 2026-06-11 — Sesión 4
+> Última actualización: 2026-06-12 — Sesión 5
 
 ## Objetivo actual
 
-Completar la **Fase 3** del proyecto: implementar **POST /tasks**.  
-✅ **Fase 3 completada.** Próximo objetivo: arrancar **Fase 4 — PUT /tasks/{id}**.
+Completar la **Fase 4** del proyecto: implementar **PUT /tasks/{id}**.  
+✅ **Fase 4 completada.** Próximo objetivo: arrancar **Fase 5 — DELETE /tasks/{id}**.
 
 ## Estado actual
 
@@ -25,20 +25,25 @@ Completar la **Fase 3** del proyecto: implementar **POST /tasks**.
   - Tests: POST válido → 201, POST inválido → 400
   - `dotnet test` → 6/6 ✅
   - Checklist reestructurado: tests primero (TDD)
+- [x] **Fase 4: PUT /tasks/{id}** — completa
+  - `UpdateTaskRequest` con `[Required]` y `[StringLength]`
+  - `UpdateAsync` en repositorio, servicio y controller
+  - `PUT /api/tasks/{id}` con 200 OK, 404 si no existe
+  - Tests: PUT válido → 200, PUT inexistente → 404, PUT inválido → 400
+  - `dotnet test` → 9/9 ✅
 
 ### 🔄 En progreso
 
-- Nada — Fase 3 completada, Fase 4 lista para arrancar
+- Nada — Fase 4 completada, Fase 5 lista para arrancar
 
 ### ⏳ Próxima tarea
 
-**Fase 4 — PUT /tasks/{id}.** Empezar por:
+**Fase 5 — DELETE /tasks/{id}.** Empezar por:
 
-1. **[TEST]** PUT válido → 200 + tarea actualizada (escribir test → falla)
-2. **[TEST]** PUT inexistente → 404 (escribir test → falla)
-3. **[TEST]** PUT inválido → 400 (escribir test → falla)
+1. **[TEST]** DELETE existente → 204 NoContent (escribir test → falla)
+2. **[TEST]** DELETE inexistente → 404 (escribir test → falla)
 
-El orden de las tareas está en `docs/checklists/project-phases.md` (Fase 4).
+El orden de las tareas está en `docs/checklists/project-phases.md` (Fase 5).
 
 ## Archivos que se deben leer primero
 
@@ -47,7 +52,7 @@ El orden de las tareas está en `docs/checklists/project-phases.md` (Fase 4).
 3. `docs/project-state.md`
 4. `docs/architecture/0001-architecture.md`
 5. `docs/handoffs/chat-template.md` (este archivo)
-6. `docs/checklists/project-phases.md` (Fase 4)
+6. `docs/checklists/project-phases.md` (Fase 5)
 7. `docs/learning/testing.md` (patrón de tests)
 8. `docs/learning/validation.md` (Data Annotations)
 
@@ -58,7 +63,7 @@ Luego leer los archivos específicos para la implementación:
 - `src/TodoApi.Api/Infrastructure/InMemory/InMemoryTaskRepository.cs`
 - `src/TodoApi.Api/Features/Tasks/Services/ITaskService.cs`
 - `src/TodoApi.Api/Features/Tasks/Services/TaskService.cs`
-- `src/TodoApi.Api/Features/Tasks/Dtos/CreateTaskRequest.cs`
+- `src/TodoApi.Api/Features/Tasks/Dtos/UpdateTaskRequest.cs`
 - `tests/TodoApi.Tests/TasksControllerTests.cs`
 
 ## Decisiones ya tomadas
@@ -77,10 +82,12 @@ Luego leer los archivos específicos para la implementación:
 | Singleton para repositorio en memoria | `Program.cs` |
 | Scoped para servicios de aplicación | `Program.cs` |
 | `CreatedAtAction` para 201 + Location | `TasksController.cs` |
+| PUT con 200 OK + body (no 204) | `TasksController.cs` |
+| `[FromBody]` explícito en endpoints con ruta + body | `TasksController.cs` |
 
 ## Qué NO debe hacer esta sesión
 
-- NO implementar DELETE (es Fase 5)
+- NO implementar DELETE sin TDD (es Fase 5, ya con tests)
 - NO tocar middleware de errores (Fase 7)
 - NO modificar workflows de CI/CD (Fase 8)
 - NO instalar paquetes NuGet sin consultar

@@ -2,8 +2,8 @@
 
 ## Estado actual
 
-Fase: **3 — POST /tasks (completada)**.  
-DTO de entrada, validación con Data Annotations, repositorio, servicio, controller y tests de integración funcionando. 6/6 tests pasando.
+Fase: **4 — PUT /tasks/{id} (completada)**.  
+DTO de entrada, validación, UpdateAsync en repositorio/servicio/controller, tests de integración funcionando. 9/9 tests pasando.
 
 ## Qué ya está definido
 
@@ -40,6 +40,16 @@ DTO de entrada, validación con Data Annotations, repositorio, servicio, control
 - [x] tests de integración: 200 + lista, 200 por ID, 404 inexistente
 - [x] `dotnet test` → 4/4 ✅
 
+## Qué ya está implementado (Fase 4)
+
+- [x] `UpdateTaskRequest` (DTO de entrada con `[Required]` y `[StringLength]`)
+- [x] `UpdateAsync` en `ITaskRepository`
+- [x] `UpdateAsync` en `InMemoryTaskRepository` (busca por ID, actualiza Title + IsCompleted)
+- [x] `UpdateAsync` en `ITaskService` + `TaskService` (mapeo UpdateTaskRequest → TaskItem → TaskResponse)
+- [x] `PUT /api/tasks/{id}` en `TasksController` (200 OK + tarea actualizada, 404 si no existe)
+- [x] tests: PUT válido → 200, PUT inexistente → 404, PUT inválido → 400
+- [x] `dotnet test` → 9/9 ✅
+
 ## Qué ya está implementado (Fase 3)
 
 - [x] `CreateTaskRequest` (DTO de entrada con `[Required]` y `[StringLength]`)
@@ -54,10 +64,10 @@ DTO de entrada, validación con Data Annotations, repositorio, servicio, control
 ## Próximas fases
 
 | Fase | Estado |
-|---|---|
+|---|---|---|
 | 2 — GET /tasks | ✅ Completada |
 | 3 — POST /tasks | ✅ Completada |
-| 4 — PUT /tasks | Pendiente |
+| 4 — PUT /tasks | ✅ Completada |
 | 5 — DELETE /tasks | Pendiente |
 | 6 — Swagger | Pendiente |
 | 7 — Error handling | Pendiente |
@@ -68,15 +78,13 @@ DTO de entrada, validación con Data Annotations, repositorio, servicio, control
 
 No hay bloqueos técnicos en este momento.
 
-## Última sesión (2026-06-11, sesión 4)
+## Última sesión (2026-06-12, sesión 5)
 
-- se implementó la Fase 3 completa: CreateTaskRequest, validación, CreateAsync en repositorio/servicio/controller
+- se implementó la Fase 4 completa: UpdateTaskRequest, validación, UpdateAsync en repositorio/servicio/controller
 - se escribieron los tests primero (TDD estricto)
-- se reestructuró el checklist de fases (tests primero)
-- se documentaron Data Annotations en `docs/learning/validation.md`
-- se actualizó `docs/learning/http-methods.md` con 201 Created y POST
-- `dotnet build` y `dotnet test` pasan (6/6 ✅)
+- PUT válido → 200, PUT inexistente → 404, PUT inválido → 400
+- `dotnet build` y `dotnet test` pasan (9/9 ✅)
 
 ## Siguiente paso
 
-Arrancar Fase 4 (PUT /tasks/{id}).
+Arrancar Fase 5 (DELETE /tasks/{id}).

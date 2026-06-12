@@ -33,4 +33,15 @@ public class InMemoryTaskRepository : ITaskRepository
         _tasks.Add(task);
         return Task.FromResult(task);
     }
+
+    public Task<TaskItem?> UpdateAsync(Guid id, TaskItem task)
+    {
+        var existing = _tasks.FirstOrDefault(t => t.Id == id);
+        if (existing is null)
+            return Task.FromResult<TaskItem?>(null);
+
+        existing.Title = task.Title;
+        existing.IsCompleted = task.IsCompleted;
+        return Task.FromResult<TaskItem?>(existing);
+    }
 }

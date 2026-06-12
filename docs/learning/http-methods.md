@@ -47,6 +47,18 @@ public async Task<ActionResult<TaskResponse>> GetById(Guid id)
     return Ok(task);                               // 200 + JSON
 }
 
+// 200 OK si existe, 404 si no (PUT actualizar)
+[HttpPut("{id:guid}")]
+public async Task<ActionResult<TaskResponse>> Update(Guid id, [FromBody] UpdateTaskRequest request)
+{
+    var task = await _taskService.UpdateAsync(id, request);
+
+    if (task is null)
+        return NotFound();                         // 404
+
+    return Ok(task);                               // 200 + JSON actualizado
+}
+
 // 201 Created con Location header
 [HttpPost]
 public async Task<ActionResult<TaskResponse>> Create([FromBody] CreateTaskRequest request)
@@ -113,4 +125,7 @@ Cliente → GET /api/tasks/{id-no-existe} → 404
 Cliente → GET /api/tasks/abc → 400 (GUID inválido por route constraint)
 Cliente → POST /api/tasks (válido) → 201 + Location: /api/tasks/{id} + TaskResponse
 Cliente → POST /api/tasks (inválido) → 400 + errores de validación
+Cliente → PUT /api/tasks/{id-existe} → 200 + TaskResponse actualizado
+Cliente → PUT /api/tasks/{id-no-existe} → 404
+Cliente → PUT /api/tasks/{id} (inválido) → 400 + errores de validación
 ```

@@ -5,7 +5,8 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 
 **Regla de trabajo:** no se salta una fase sin completar la anterior.  
 **Regla de aprendizaje:** cada tarea incluye entender el concepto antes de escribir código.  
-**Regla de documentación:** cada fase deja rastro en `docs/progress/`, `docs/learning/` y `docs/project-state.md`.
+**Regla de documentación:** cada fase deja rastro en `docs/progress/`, `docs/learning/` y `docs/project-state.md`.  
+**Regla de conceptos:** cada ítem en "Conceptos a aprender" debe incluir la ruta al archivo en `docs/learning/` donde se documentó, con el formato `→ docs/learning/<archivo>.md`.
 
 ---
 
@@ -94,34 +95,33 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 - [x] Documentar conceptos en `docs/learning/`
 - [x] Actualizar `docs/progress/` y `docs/project-state.md`
 
-### Conceptos a aprender
+### Conceptos aprendidos
 
-- HTTP POST y creación de recursos
-- 201 Created y Location header
-- Validación automática con Data Annotations
-- Mapeo DTO → dominio
+- [x] HTTP POST y creación de recursos → `docs/learning/http-methods.md`
+- [x] 201 Created y Location header → `docs/learning/http-methods.md`
+- [x] Validación automática con Data Annotations → `docs/learning/validation.md`
+- [x] Mapeo DTO → dominio → `docs/learning/dto.md`
 
 ---
 
-## Fase 4 — PUT /tasks/{id}
+## Fase 4 — PUT /tasks/{id} ✅ *(completada)*
 
-- [ ] **[TEST]** PUT válido → 200 + tarea actualizada (escribir test → falla)
-- [ ] **[TEST]** PUT inexistente → 404 (escribir test → falla)
-- [ ] **[TEST]** PUT inválido → 400 (escribir test → falla)
-- [ ] Crear `UpdateTaskRequest` con validación
-- [ ] Agregar `UpdateAsync` a `ITaskRepository`
-- [ ] Implementar `UpdateAsync` en `InMemoryTaskRepository`
-- [ ] Agregar `UpdateAsync` a `ITaskService`
-- [ ] Agregar `PUT /api/tasks/{id}` al controller
-- [ ] → Tests GREEN
-- [ ] Documentar conceptos en `docs/learning/`
-- [ ] Actualizar `docs/progress/` y `docs/project-state.md`
+- [x] **[TEST]** PUT válido → 200 + tarea actualizada (escribir test → falla)
+- [x] **[TEST]** PUT inexistente → 404 (escribir test → falla)
+- [x] **[TEST]** PUT inválido → 400 (escribir test → falla)
+- [x] Crear `UpdateTaskRequest` con validación
+- [x] Agregar `UpdateAsync` a `ITaskRepository`
+- [x] Implementar `UpdateAsync` en `InMemoryTaskRepository`
+- [x] Agregar `UpdateAsync` a `ITaskService`
+- [x] Agregar `PUT /api/tasks/{id}` al controller
+- [x] → Tests GREEN
+- [x] Documentar conceptos en `docs/learning/`
+- [x] Actualizar `docs/progress/` y `docs/project-state.md`
 
-### Conceptos a aprender
+### Conceptos aprendidos
 
-- HTTP PUT vs PATCH (idempotencia)
-- Actualización completa del recurso
-- 200 OK vs 204 NoContent
+- [x] HTTP PUT vs PATCH (idempotencia y actualización completa) → `docs/learning/http-methods.md`
+- [x] 200 OK vs 204 NoContent → `docs/learning/http-methods.md`
 
 ---
 
@@ -139,9 +139,9 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 
 ### Conceptos a aprender
 
-- HTTP DELETE semántica
-- 204 NoContent
-- Decisiones de diseño: error vs silencio en delete
+- [ ] HTTP DELETE semántica → `docs/learning/http-methods.md`
+- [ ] 204 NoContent → `docs/learning/http-methods.md`
+- [ ] Decisiones de diseño: error vs silencio en delete
 
 ---
 
@@ -156,9 +156,9 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 
 ### Conceptos a aprender
 
-- ¿Qué es OpenAPI / Swagger?
-- Documentación automática de endpoints
-- Swagger UI como herramienta de exploración
+- [ ] ¿Qué es OpenAPI / Swagger? → `docs/learning/swagger.md`
+- [ ] Documentación automática de endpoints
+- [ ] Swagger UI como herramienta de exploración
 
 ---
 
@@ -176,9 +176,9 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 
 ### Conceptos a aprender
 
-- Middleware pipeline en ASP.NET Core
-- Excepciones vs resultados HTTP
-- Seguridad: no exponer stack traces
+- [ ] Middleware pipeline en ASP.NET Core
+- [ ] Excepciones vs resultados HTTP
+- [ ] Seguridad: no exponer stack traces
 
 ---
 
@@ -192,9 +192,9 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 
 ### Conceptos a aprender
 
-- GitHub Actions básico
-- Triggers: push y pull_request
-- Matriz de tests
+- [ ] GitHub Actions básico
+- [ ] Triggers: push y pull_request
+- [ ] Matriz de tests
 
 ---
 
@@ -216,7 +216,7 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 | 1 — Scaffolding | 10 + docs | ✅ |
 | 2 — GET /tasks | 14 | ✅ |
 | 3 — POST /tasks | 10 | ✅ |
-| 4 — PUT /tasks | 11 | ⏳ |
+| 4 — PUT /tasks | 11 | ✅ |
 | 5 — DELETE /tasks | 9 | ⏳ |
 | 6 — Swagger | 6 | ⏳ |
 | 7 — Error handling | 9 | ⏳ |
