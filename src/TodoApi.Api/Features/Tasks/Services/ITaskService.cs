@@ -12,4 +12,5 @@ public interface ITaskService
     Task<TaskResponse?> GetByIdAsync(Guid id);
     Task<TaskResponse> CreateAsync(CreateTaskRequest request);
     Task<TaskResponse?> UpdateAsync(Guid id, UpdateTaskRequest request);
+    Task<bool> DeleteAsync(Guid id);
 }

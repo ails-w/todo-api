@@ -56,6 +56,21 @@ public class TasksController : ControllerBase
     }
 
     /// <summary>
+    /// DELETE /api/tasks/{id} — elimina una tarea.
+    /// 204 NoContent si se eliminó, 404 si no existe.
+    /// </summary>
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        var deleted = await _taskService.DeleteAsync(id);
+
+        if (!deleted)
+            return NotFound();
+
+        return NoContent();
+    }
+
+    /// <summary>
     /// GET /api/tasks/{id} — devuelve una tarea por ID.
     /// 404 si no existe.
     /// </summary>

@@ -44,4 +44,14 @@ public class InMemoryTaskRepository : ITaskRepository
         existing.IsCompleted = task.IsCompleted;
         return Task.FromResult<TaskItem?>(existing);
     }
+
+    public Task<bool> DeleteAsync(Guid id)
+    {
+        var task = _tasks.FirstOrDefault(t => t.Id == id);
+        if (task is null)
+            return Task.FromResult(false);
+
+        _tasks.Remove(task);
+        return Task.FromResult(true);
+    }
 }
