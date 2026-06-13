@@ -1,11 +1,12 @@
 # Handoff — Estado actual del proyecto
 
-> Última actualización: 2026-06-12 — Sesión 5
+> Última actualización: 2026-06-13 — Sesión 6b
 
 ## Objetivo actual
 
-Completar la **Fase 4** del proyecto: implementar **PUT /tasks/{id}**.  
-✅ **Fase 4 completada.** Próximo objetivo: arrancar **Fase 5 — DELETE /tasks/{id}**.
+✅ **Fase 6 completada** (DELETE /tasks/{id}).  
+🎯 **Próximo objetivo: arrancar Fase 7 — Swagger / OpenAPI.**  
+La Fase 6 incluyó: DELETE implementado con TDD (repositorio, servicio, controller), tests de integración, 11/11 tests pasando. PR #2 lista para crear.
 
 ## Estado actual
 
@@ -31,19 +32,27 @@ Completar la **Fase 4** del proyecto: implementar **PUT /tasks/{id}**.
   - `PUT /api/tasks/{id}` con 200 OK, 404 si no existe
   - Tests: PUT válido → 200, PUT inexistente → 404, PUT inválido → 400
   - `dotnet test` → 9/9 ✅
+- [x] **Fase 5: CI/CD real + Linting** — completa
+  - `.editorconfig` con reglas de estilo .NET
+  - `Directory.Build.props` con analizadores activados en build
+  - Workflows reales: `ci.yml` (build + `dotnet format`) y `test.yml` (tests)
+  - Verificación en GitHub Actions (ambos success)
+  - PR #1 creada con cambios acumulados (Fases 2-5)
+- [x] **Fase 6: DELETE /tasks/{id}** — completa
+  - `DeleteAsync` en `ITaskRepository` + `InMemoryTaskRepository`
+  - `DeleteAsync` en `ITaskService` + `TaskService`
+  - `DELETE /api/tasks/{id}` en controller (204 NoContent / 404 NotFound)
+  - Tests: DELETE existente → 204, DELETE inexistente → 404
+  - `dotnet test` → 11/11 ✅
+  - PR #2 lista con cambios acumulados (Fase 6)
 
 ### 🔄 En progreso
 
-- Nada — Fase 4 completada, Fase 5 lista para arrancar
+- Nada — Fase 6 completada, Fase 7 lista para arrancar
 
 ### ⏳ Próxima tarea
 
-**Fase 5 — DELETE /tasks/{id}.** Empezar por:
-
-1. **[TEST]** DELETE existente → 204 NoContent (escribir test → falla)
-2. **[TEST]** DELETE inexistente → 404 (escribir test → falla)
-
-El orden de las tareas está en `docs/checklists/project-phases.md` (Fase 5).
+**Fase 7 — Swagger / OpenAPI.** Arrancar configuración de Swagger UI y personalización.
 
 ## Archivos que se deben leer primero
 
@@ -52,18 +61,16 @@ El orden de las tareas está en `docs/checklists/project-phases.md` (Fase 5).
 3. `docs/project-state.md`
 4. `docs/architecture/0001-architecture.md`
 5. `docs/handoffs/chat-template.md` (este archivo)
-6. `docs/checklists/project-phases.md` (Fase 5)
+6. `docs/checklists/project-phases.md` (Fase 6 — DELETE /tasks/{id})
 7. `docs/learning/testing.md` (patrón de tests)
-8. `docs/learning/validation.md` (Data Annotations)
+8. `docs/learning/http-methods.md` (DELETE semántica)
 
-Luego leer los archivos específicos para la implementación:
-- `src/TodoApi.Api/Program.cs`
+Luego leer los archivos específicos para la implementación (Fase 6):
 - `src/TodoApi.Api/Controllers/TasksController.cs`
 - `src/TodoApi.Api/Features/Tasks/Contracts/ITaskRepository.cs`
 - `src/TodoApi.Api/Infrastructure/InMemory/InMemoryTaskRepository.cs`
 - `src/TodoApi.Api/Features/Tasks/Services/ITaskService.cs`
 - `src/TodoApi.Api/Features/Tasks/Services/TaskService.cs`
-- `src/TodoApi.Api/Features/Tasks/Dtos/UpdateTaskRequest.cs`
 - `tests/TodoApi.Tests/TasksControllerTests.cs`
 
 ## Decisiones ya tomadas
@@ -84,32 +91,34 @@ Luego leer los archivos específicos para la implementación:
 | `CreatedAtAction` para 201 + Location | `TasksController.cs` |
 | PUT con 200 OK + body (no 204) | `TasksController.cs` |
 | `[FromBody]` explícito en endpoints con ruta + body | `TasksController.cs` |
+| `Task<bool>` para DeleteAsync (booleano, no null) | `ITaskRepository.cs` |
+| DELETE → 204 NoContent, 404 si no existe | `TasksController.cs` |
 
 ## Qué NO debe hacer esta sesión
 
-- NO implementar DELETE sin TDD (es Fase 5, ya con tests)
-- NO tocar middleware de errores (Fase 7)
-- NO modificar workflows de CI/CD (Fase 8)
+- NO tocar middleware de errores (Fase 8)
 - NO instalar paquetes NuGet sin consultar
 - NO borrar archivos de tests existentes sin confirmación
+- NO modificar los workflows de CI/CD sin necesidad
 
 ## Reglas de trabajo
 
 1. **TDD estricto**: escribir el test primero, después el código
 2. **Explicar cada concepto** antes de escribir código
-3. **Actualizar documentación** al cerrar la sesión:
+3. **Commits y PR**: cada fase incluye al menos 2 commits de avance propuestos por el asistente. Al completar implementación y documentación, el chat propondrá una Pull Request con los cambios acumulados
+4. **Actualizar documentación** al cerrar la sesión:
    - `docs/progress/<fecha>.md`
    - `docs/project-state.md`
    - `docs/learning/` si aparece un concepto nuevo
    - `docs/checklists/project-phases.md` (marcar tareas completadas)
    - Este archivo (handoff)
-4. Cada tarea de cada fase debe incluir su test correspondiente
+5. Cada tarea de cada fase debe incluir su test correspondiente
 
 ## Cierre del chat
 
 Antes de terminar, asegurarse de haber actualizado:
-- [ ] `docs/project-state.md`
-- [ ] `docs/progress/<fecha>.md`
-- [ ] `docs/learning/` si apareció un concepto nuevo
-- [ ] `docs/checklists/project-phases.md` (tareas completadas marcadas)
-- [ ] Este archivo (handoff actualizado)
+- [x] `docs/project-state.md`
+- [x] `docs/progress/2026-06-13.md`
+- [x] `docs/learning/http-methods.md` — DELETE semántica y ejemplo
+- [x] `docs/checklists/project-phases.md` (Fase 6 marcada como completada)
+- [x] Este archivo (handoff actualizado)

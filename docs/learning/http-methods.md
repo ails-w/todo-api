@@ -11,7 +11,7 @@ Los **métodos HTTP** expresan la intención de la acción. Los **códigos de re
 | `GET` | Leer/recuperar datos | `GET /api/tasks` — lista de tareas |
 | `POST` | Crear un recurso | Fase 3: `POST /api/tasks` — crear tarea |
 | `PUT` | Reemplazar/actualizar | Fase 4: `PUT /api/tasks/{id}` — actualizar tarea |
-| `DELETE` | Borrar un recurso | Fase 5: `DELETE /api/tasks/{id}` — eliminar tarea |
+| `DELETE` | Borrar un recurso | Fase 6: `DELETE /api/tasks/{id}` — eliminar tarea |
 
 ## Códigos de respuesta
 
@@ -20,7 +20,7 @@ Los **métodos HTTP** expresan la intención de la acción. Los **códigos de re
 | `200 OK` | La request se procesó correctamente y devuelve datos | `GET /api/tasks` → lista de tareas |
 | `200 OK` | Recurso encontrado y devuelto | `GET /api/tasks/{id}` → tarea individual |
 | `201 Created` | Recurso creado exitosamente | `POST /api/tasks` → tarea nueva (Fase 3) |
-| `204 NoContent` | Éxito sin body | `DELETE /api/tasks/{id}` → tarea eliminada (Fase 5) |
+| `204 NoContent` | Éxito sin body | `DELETE /api/tasks/{id}` → tarea eliminada (Fase 6) |
 | `400 Bad Request` | La request es inválida (validación o formato) | Ruta con GUID inválido o body inválido |
 | `404 Not Found` | El recurso solicitado no existe | `GET /api/tasks/{id}` o `PUT /api/tasks/{id}` con ID inexistente |
 
@@ -57,6 +57,18 @@ public async Task<ActionResult<TaskResponse>> Update(Guid id, [FromBody] UpdateT
         return NotFound();                         // 404
 
     return Ok(task);                               // 200 + JSON actualizado
+}
+
+// 204 NoContent si existe, 404 si no (DELETE)
+[HttpDelete("{id:guid}")]
+public async Task<IActionResult> Delete(Guid id)
+{
+    var deleted = await _taskService.DeleteAsync(id);
+
+    if (!deleted)
+        return NotFound();                          // 404
+
+    return NoContent();                             // 204 sin body
 }
 
 // 201 Created con Location header
@@ -100,7 +112,7 @@ Content-Type: application/json
 |---|---|---|
 | `Ok(obj)` | 200 | Éxito con body |
 | `CreatedAtAction(name, routeValues, obj)` | 201 | Recurso creado + Location header |
-| `NoContent()` | 204 | Éxito sin body (DELETE) |
+| `NoContent()` | 204 | Éxito sin body |
 | `BadRequest()` | 400 | Datos inválidos (validación) |
 | `NotFound()` | 404 | Recurso no encontrado |
 
@@ -128,4 +140,6 @@ Cliente → POST /api/tasks (inválido) → 400 + errores de validación
 Cliente → PUT /api/tasks/{id-existe} → 200 + TaskResponse actualizado
 Cliente → PUT /api/tasks/{id-no-existe} → 404
 Cliente → PUT /api/tasks/{id} (inválido) → 400 + errores de validación
+Cliente → DELETE /api/tasks/{id-existe} → 204
+Cliente → DELETE /api/tasks/{id-no-existe} → 404
 ```

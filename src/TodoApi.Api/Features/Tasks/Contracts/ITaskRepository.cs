@@ -11,4 +11,5 @@ public interface ITaskRepository
     Task<TaskItem?> GetByIdAsync(Guid id);
     Task<TaskItem> CreateAsync(TaskItem task);
     Task<TaskItem?> UpdateAsync(Guid id, TaskItem task);
+    Task<bool> DeleteAsync(Guid id);
 }

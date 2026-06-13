@@ -59,4 +59,9 @@ public class TaskService : ITaskService
             ? null
             : new TaskResponse(updated.Id, updated.Title, updated.IsCompleted);
     }
+
+    public async Task<bool> DeleteAsync(Guid id)
+    {
+        return await _repository.DeleteAsync(id);
+    }
 }

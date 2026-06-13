@@ -7,6 +7,7 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 **Regla de aprendizaje:** cada tarea incluye entender el concepto antes de escribir código.  
 **Regla de documentación:** cada fase deja rastro en `docs/progress/`, `docs/learning/` y `docs/project-state.md`.  
 **Regla de conceptos:** cada ítem en "Conceptos a aprender" debe incluir la ruta al archivo en `docs/learning/` donde se documentó, con el formato `→ docs/learning/<archivo>.md`.
+**Regla de commits y PR:** cada fase incluye al menos **2 commits de avance** propuestos por el asistente. Al completar la implementación y documentación, el chat propondrá una **Pull Request** con los cambios acumulados de la fase.
 
 ---
 
@@ -125,32 +126,61 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 
 ---
 
-## Fase 5 — DELETE /tasks/{id}
+## Fase 5 — CI/CD real + Linting
 
-- [ ] **[TEST]** DELETE existente → 204 NoContent (escribir test → falla)
-- [ ] **[TEST]** DELETE inexistente → 404 (escribir test → falla)
-- [ ] Agregar `DeleteAsync` a `ITaskRepository`
-- [ ] Implementar `DeleteAsync` en `InMemoryTaskRepository`
-- [ ] Agregar `DeleteAsync` a `ITaskService`
-- [ ] Agregar `DELETE /api/tasks/{id}` al controller
-- [ ] → Tests GREEN
-- [ ] Documentar conceptos en `docs/learning/`
-- [ ] Actualizar `docs/progress/` y `docs/project-state.md`
+- [x] Crear `.editorconfig` en la raíz con reglas básicas de estilo .NET
+- [x] Agregar `Directory.Build.props` con `EnforceCodeStyleInBuild`
+- [x] Reemplazar `.github/workflows/ci.yml` placeholder con build real (push + PR)
+- [x] Reemplazar `.github/workflows/test.yml` placeholder con `dotnet test`
+- [x] Agregar `dotnet format --verify-no-changes` al workflow de CI
+- [x] Commit 1: configuración de linting (.editorconfig + Directory.Build.props)
+- [x] Commit 2: workflows de CI/CD reales (ci.yml + test.yml)
+- [x] **[TEST]** Verificar que los workflows corren en GitHub (push y PR)
+- [x] → Pedir al chat una propuesta de PR con los cambios de la fase
+- [x] Documentar conceptos en `docs/learning/` (GitHub Actions)
+- [x] Actualizar `docs/progress/` y `docs/project-state.md`
 
-### Conceptos a aprender
+### Conceptos aprendidos
 
-- [ ] HTTP DELETE semántica → `docs/learning/http-methods.md`
-- [ ] 204 NoContent → `docs/learning/http-methods.md`
-- [ ] Decisiones de diseño: error vs silencio en delete
+- [x] GitHub Actions básico (triggers, jobs, steps) → `docs/learning/github-actions.md`
+- [x] Triggers: push y pull_request → `docs/learning/github-actions.md`
+- [x] `dotnet format` como verificación de estilo en CI → `docs/learning/github-actions.md`
+- [x] `.editorconfig` y analizadores integrados de .NET → `docs/learning/dotnet-analyzers.md`
 
 ---
 
-## Fase 6 — Swagger / OpenAPI
+## Fase 6 — DELETE /tasks/{id} ✅ *(completada)*
+
+- [x] **[TEST]** DELETE existente → 204 NoContent (escribir test → falla)
+- [x] **[TEST]** DELETE inexistente → 404 (escribir test → falla)
+- [x] Agregar `DeleteAsync` a `ITaskRepository`
+- [x] Implementar `DeleteAsync` en `InMemoryTaskRepository`
+- [x] Agregar `DeleteAsync` a `ITaskService`
+- [x] Agregar `DELETE /api/tasks/{id}` al controller
+- [x] → Tests GREEN
+- [x] Commit 1: implementación de DELETE (repositorio + servicio + controller)
+- [x] Commit 2: tests + documentación de DELETE
+- [x] → Pedir al chat una propuesta de PR con los cambios acumulados desde el último PR
+- [x] Documentar conceptos en `docs/learning/`
+- [x] Actualizar `docs/progress/` y `docs/project-state.md`
+
+### Conceptos aprendidos
+
+- [x] HTTP DELETE semántica → `docs/learning/http-methods.md`
+- [x] 204 NoContent → `docs/learning/http-methods.md`
+- [x] Decisiones de diseño: error vs silencio en delete
+
+---
+
+## Fase 7 — Swagger / OpenAPI
 
 - [ ] **[TEST]** Explorar Swagger UI y verificar endpoints listados
 - [ ] Personalizar título y descripción de la API
 - [ ] Verificar schemas de DTOs en Swagger UI
 - [ ] Probar todos los endpoints desde Swagger UI
+- [ ] Commit 1: configuración de Swagger (paquete + Program.cs)
+- [ ] Commit 2: personalización + verificación en Swagger UI
+- [ ] → Pedir al chat una propuesta de PR con los cambios acumulados desde el último PR
 - [ ] Documentar conceptos en `docs/learning/`
 - [ ] Actualizar `docs/progress/` y `docs/project-state.md`
 
@@ -162,7 +192,7 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 
 ---
 
-## Fase 7 — Error handling global
+## Fase 8 — Error handling global
 
 - [ ] **[TEST]** Ruta inexistente → 404 (escribir test → falla)
 - [ ] **[TEST]** Error interno → 500 sin datos sensibles (escribir test → falla)
@@ -171,6 +201,9 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 - [ ] Capturar errores no controlados → 500 genérico (sin stack trace)
 - [ ] Registrar middleware en el pipeline (Program.cs)
 - [ ] → Tests GREEN
+- [ ] Commit 1: implementación de ExceptionMiddleware
+- [ ] Commit 2: tests + documentación de error handling
+- [ ] → Pedir al chat una propuesta de PR con los cambios acumulados desde el último PR
 - [ ] Documentar conceptos en `docs/learning/`
 - [ ] Actualizar `docs/progress/` y `docs/project-state.md`
 
@@ -182,28 +215,15 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 
 ---
 
-## Fase 8 — CI/CD real
-
-- [ ] Reemplazar `ci.yml` placeholder con build real en push y PR
-- [ ] Reemplazar `test.yml` placeholder con `dotnet test`
-- [ ] **[TEST]** Verificar que los workflows corren en GitHub
-- [ ] Documentar conceptos en `docs/learning/`
-- [ ] Actualizar `docs/progress/` y `docs/project-state.md`
-
-### Conceptos a aprender
-
-- [ ] GitHub Actions básico
-- [ ] Triggers: push y pull_request
-- [ ] Matriz de tests
-
----
-
 ## Fase 9 — Cierre y documentación final
 
 - [ ] Revisar que todas las fases estén completas
 - [ ] Actualizar `docs/project-state.md` con resumen final
 - [ ] Documentar último progreso en `docs/progress/`
 - [ ] Revisar `docs/learning/` — documentar conceptos pendientes
+- [ ] Commit 1: actualización de documentación final
+- [ ] Commit 2: handoff listo para próxima etapa
+- [ ] → Pedir al chat una propuesta de PR final con todo el proyecto
 - [ ] Dejar handoff listo para próxima etapa (si aplica)
 
 ---
@@ -217,11 +237,11 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 | 2 — GET /tasks | 14 | ✅ |
 | 3 — POST /tasks | 10 | ✅ |
 | 4 — PUT /tasks | 11 | ✅ |
-| 5 — DELETE /tasks | 9 | ⏳ |
-| 6 — Swagger | 6 | ⏳ |
-| 7 — Error handling | 9 | ⏳ |
-| 8 — CI/CD | 5 | ⏳ |
-| 9 — Cierre | 5 | ⏳ |
+| 5 — CI/CD + Linting | 11 | ✅ |
+| 6 — DELETE /tasks | 12 | ✅ |
+| 7 — Swagger | 9 | ⏳ |
+| 8 — Error handling | 12 | ⏳ |
+| 9 — Cierre | 8 | ⏳ |
 
 ---
 
