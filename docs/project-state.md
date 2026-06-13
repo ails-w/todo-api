@@ -2,8 +2,8 @@
 
 ## Estado actual
 
-Fase: **4 — PUT /tasks/{id} (completada)**.  
-DTO de entrada, validación, UpdateAsync en repositorio/servicio/controller, tests de integración funcionando. 9/9 tests pasando.
+Fase: **6 — DELETE /tasks/{id} (completada)**.  
+DELETE implementado con TDD: `DeleteAsync` en repositorio, servicio y controller. 11/11 tests pasando.
 
 ## Qué ya está definido
 
@@ -61,30 +61,52 @@ DTO de entrada, validación, UpdateAsync en repositorio/servicio/controller, tes
 - [x] documentación de conceptos: validation.md, http-methods.md actualizado
 - [x] `dotnet test` → 6/6 ✅
 
+## Qué ya está implementado (Fase 5)
+
+- [x] `.editorconfig` con reglas de estilo .NET (indentación, naming, formateo, usings, análisis)
+- [x] `Directory.Build.props` con `EnforceCodeStyleInBuild`, `EnableNETAnalyzers`, `AnalysisLevel`
+- [x] `.github/workflows/ci.yml` con build + `dotnet format --verify-no-changes` en push (main/dev) y PR (main)
+- [x] `.github/workflows/test.yml` con `dotnet test` en push (main/dev) y PR (main)
+- [x] Workflows verificados en GitHub Actions (ambos success)
+- [x] Pull Request #1 creada con plantilla del repositorio
+
+## Qué ya está implementado (Fase 6)
+
+- [x] `DeleteAsync` en `ITaskRepository` (`Task<bool>` — true si se eliminó, false si no existe)
+- [x] `DeleteAsync` en `InMemoryTaskRepository` (busca, remueve, devuelve true/false)
+- [x] `DeleteAsync` en `ITaskService` + `TaskService` (delega al repositorio)
+- [x] `DELETE /api/tasks/{id}` en `TasksController` (204 NoContent / 404 NotFound)
+- [x] Tests: DELETE existente → 204 + verificación de eliminación, DELETE inexistente → 404
+- [x] `dotnet test` → 11/11 ✅
+
 ## Próximas fases
 
 | Fase | Estado |
-|---|---|---|
+|---|---|
 | 2 — GET /tasks | ✅ Completada |
 | 3 — POST /tasks | ✅ Completada |
 | 4 — PUT /tasks | ✅ Completada |
-| 5 — DELETE /tasks | Pendiente |
-| 6 — Swagger | Pendiente |
-| 7 — Error handling | Pendiente |
-| 8 — CI/CD | Pendiente |
-| 9 — Cierre | Pendiente |
+| 5 — CI/CD + Linting | ✅ Completada |
+| 6 — DELETE /tasks | ✅ Completada |
+| 7 — Swagger | ⏳ Pendiente |
+| 8 — Error handling | ⏳ Pendiente |
+| 9 — Cierre | ⏳ Pendiente |
 
 ## Bloqueos
 
 No hay bloqueos técnicos en este momento.
 
-## Última sesión (2026-06-12, sesión 5)
+## Última sesión (2026-06-13, sesión 6)
 
-- se implementó la Fase 4 completa: UpdateTaskRequest, validación, UpdateAsync en repositorio/servicio/controller
-- se escribieron los tests primero (TDD estricto)
-- PUT válido → 200, PUT inexistente → 404, PUT inválido → 400
-- `dotnet build` y `dotnet test` pasan (9/9 ✅)
+- se creó `.editorconfig` y `Directory.Build.props` con analizadores de .NET
+- se reemplazaron los workflows placeholder por pipelines reales (build, test, formato)
+- se corrigió el formato automático con `dotnet format`
+- se verificaron los workflows en GitHub Actions (ambos success)
+- se creó la PR #1 con la plantilla del repositorio
+- se documentaron los conceptos: GitHub Actions y analizadores integrados de .NET
+- se implementó DELETE /tasks/{id} con TDD (repositorio, servicio, controller, tests)
+- `dotnet test` → 11/11 ✅
 
 ## Siguiente paso
 
-Arrancar Fase 5 (DELETE /tasks/{id}).
+Arrancar Fase 7 — Swagger / OpenAPI.

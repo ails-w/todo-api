@@ -162,6 +162,54 @@ public class TasksControllerTests
     }
 
     // ======================================================================
+    // DELETE /api/tasks/{id} — tests escritos primero (TDD, Fase 6)
+    // ======================================================================
+
+    /// <summary>
+    /// [TEST] DELETE existente -> 204 NoContent + recurso eliminado.
+    /// </summary>
+    [Fact]
+    public async Task Delete_Task_Existing_Returns_204_NoContent()
+    {
+        // Arrange
+        await using var factory = new WebApplicationFactory<Program>();
+        using var client = factory.CreateClient();
+
+        // Obtener una tarea existente de los datos semilla
+        var allResponse = await client.GetAsync("/api/tasks");
+        var allTasks = await allResponse.Content.ReadFromJsonAsync<List<TaskResponse>>();
+        var existingTask = allTasks!.First();
+
+        // Act
+        var response = await client.DeleteAsync($"/api/tasks/{existingTask.Id}");
+
+        // Assert: 204 No Content
+        Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
+
+        // Assert: realmente se eliminó (GET por ID devuelve 404)
+        var getResponse = await client.GetAsync($"/api/tasks/{existingTask.Id}");
+        Assert.Equal(HttpStatusCode.NotFound, getResponse.StatusCode);
+    }
+
+    /// <summary>
+    /// [TEST] DELETE con ID inexistente -> 404 NotFound.
+    /// </summary>
+    [Fact]
+    public async Task Delete_Task_NonExisting_Returns_404_NotFound()
+    {
+        // Arrange
+        await using var factory = new WebApplicationFactory<Program>();
+        using var client = factory.CreateClient();
+        var nonExistingId = Guid.NewGuid();
+
+        // Act
+        var response = await client.DeleteAsync($"/api/tasks/{nonExistingId}");
+
+        // Assert: 404 Not Found
+        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+    }
+
+    // ======================================================================
     // GET /api/tasks — tests heredados de Fase 2
     // ======================================================================
 
