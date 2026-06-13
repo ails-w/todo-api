@@ -168,7 +168,7 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 
 - [x] HTTP DELETE semántica → `docs/learning/http-methods.md`
 - [x] 204 NoContent → `docs/learning/http-methods.md`
-- [x] Decisiones de diseño: error vs silencio en delete
+- [x] Decisiones de diseño: error vs silencio en delete → `docs/learning/http-methods.md`
 
 ---
 
