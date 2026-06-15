@@ -178,17 +178,20 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 - [x] Personalizar título y descripción de la API
 - [x] Verificar schemas de DTOs en Swagger UI
 - [x] Probar todos los endpoints desde Swagger UI
-- [ ] Commit 1: configuración de Swagger (paquete + Program.cs)
-- [ ] Commit 2: personalización + verificación en Swagger UI
-- [ ] → Pedir al chat una propuesta de PR con los cambios acumulados desde el último PR
+- [x] Commit 1: configuración de Swagger (paquete + Program.cs) — `fcbc7f7`
+- [x] Commit 2: personalización + verificación en Swagger UI — `f7ad941`
+- [x] → Pedir al chat una propuesta de PR con los cambios acumulados desde el último PR → [#3](https://github.com/ails-w/todo-api/pull/3)
 - [x] Documentar conceptos en `docs/learning/` → `docs/learning/swagger.md`
-- [ ] Actualizar `docs/progress/` y `docs/project-state.md`
+- [x] Actualizar `docs/progress/` y `docs/project-state.md`
 
-### Conceptos a aprender
+### Conceptos aprendidos
 
 - [x] ¿Qué es OpenAPI / Swagger? → `docs/learning/swagger.md`
-- [x] Documentación automática de endpoints
-- [x] Swagger UI como herramienta de exploración
+- [x] Documentación automática de endpoints → `docs/learning/swagger.md`
+- [x] Swagger UI como herramienta de exploración → `docs/learning/swagger.md`
+- [x] Swashbuckle.AspNetCore y generación dinámica del documento → `docs/learning/swagger.md`
+- [x] Schemas de DTOs en OpenAPI (tipos, formatos, restricciones) → `docs/learning/swagger.md`
+- [x] Content-Type: application/json vs text/json vs text/plain → `docs/learning/swagger.md`
 
 ---
 
@@ -239,7 +242,7 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 | 4 — PUT /tasks | 11 | ✅ |
 | 5 — CI/CD + Linting | 11 | ✅ |
 | 6 — DELETE /tasks | 12 | ✅ |
-| 7 — Swagger | 9 | ⏳ |
+| 7 — Swagger | 9 | ✅ |
 | 8 — Error handling | 12 | ⏳ |
 | 9 — Cierre | 8 | ⏳ |
 
