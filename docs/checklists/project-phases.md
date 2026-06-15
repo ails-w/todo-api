@@ -172,23 +172,23 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 
 ---
 
-## Fase 7 — Swagger / OpenAPI
+## Fase 7 — Swagger / OpenAPI ✅ *(completada)*
 
-- [ ] **[TEST]** Explorar Swagger UI y verificar endpoints listados
-- [ ] Personalizar título y descripción de la API
-- [ ] Verificar schemas de DTOs en Swagger UI
-- [ ] Probar todos los endpoints desde Swagger UI
+- [x] **[TEST]** Explorar Swagger UI y verificar endpoints listados
+- [x] Personalizar título y descripción de la API
+- [x] Verificar schemas de DTOs en Swagger UI
+- [x] Probar todos los endpoints desde Swagger UI
 - [ ] Commit 1: configuración de Swagger (paquete + Program.cs)
 - [ ] Commit 2: personalización + verificación en Swagger UI
 - [ ] → Pedir al chat una propuesta de PR con los cambios acumulados desde el último PR
-- [ ] Documentar conceptos en `docs/learning/`
+- [x] Documentar conceptos en `docs/learning/` → `docs/learning/swagger.md`
 - [ ] Actualizar `docs/progress/` y `docs/project-state.md`
 
 ### Conceptos a aprender
 
-- [ ] ¿Qué es OpenAPI / Swagger? → `docs/learning/swagger.md`
-- [ ] Documentación automática de endpoints
-- [ ] Swagger UI como herramienta de exploración
+- [x] ¿Qué es OpenAPI / Swagger? → `docs/learning/swagger.md`
+- [x] Documentación automática de endpoints
+- [x] Swagger UI como herramienta de exploración
 
 ---
 
