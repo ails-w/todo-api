@@ -168,38 +168,41 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 
 - [x] HTTP DELETE semántica → `docs/learning/http-methods.md`
 - [x] 204 NoContent → `docs/learning/http-methods.md`
-- [x] Decisiones de diseño: error vs silencio en delete
+- [x] Decisiones de diseño: error vs silencio en delete → `docs/learning/http-methods.md`
 
 ---
 
-## Fase 7 — Swagger / OpenAPI
+## Fase 7 — Swagger / OpenAPI ✅ *(completada)*
 
-- [ ] **[TEST]** Explorar Swagger UI y verificar endpoints listados
-- [ ] Personalizar título y descripción de la API
-- [ ] Verificar schemas de DTOs en Swagger UI
-- [ ] Probar todos los endpoints desde Swagger UI
-- [ ] Commit 1: configuración de Swagger (paquete + Program.cs)
-- [ ] Commit 2: personalización + verificación en Swagger UI
-- [ ] → Pedir al chat una propuesta de PR con los cambios acumulados desde el último PR
-- [ ] Documentar conceptos en `docs/learning/`
-- [ ] Actualizar `docs/progress/` y `docs/project-state.md`
+- [x] **[TEST]** Explorar Swagger UI y verificar endpoints listados
+- [x] Personalizar título y descripción de la API
+- [x] Verificar schemas de DTOs en Swagger UI
+- [x] Probar todos los endpoints desde Swagger UI
+- [x] Commit 1: configuración de Swagger (paquete + Program.cs) — `fcbc7f7`
+- [x] Commit 2: personalización + verificación en Swagger UI — `f7ad941`
+- [x] → Pedir al chat una propuesta de PR con los cambios acumulados desde el último PR → [#3](https://github.com/ails-w/todo-api/pull/3)
+- [x] Documentar conceptos en `docs/learning/` → `docs/learning/swagger.md`
+- [x] Actualizar `docs/progress/` y `docs/project-state.md`
 
-### Conceptos a aprender
+### Conceptos aprendidos
 
-- [ ] ¿Qué es OpenAPI / Swagger? → `docs/learning/swagger.md`
-- [ ] Documentación automática de endpoints
-- [ ] Swagger UI como herramienta de exploración
+- [x] ¿Qué es OpenAPI / Swagger? → `docs/learning/swagger.md`
+- [x] Documentación automática de endpoints → `docs/learning/swagger.md`
+- [x] Swagger UI como herramienta de exploración → `docs/learning/swagger.md`
+- [x] Swashbuckle.AspNetCore y generación dinámica del documento → `docs/learning/swagger.md`
+- [x] Schemas de DTOs en OpenAPI (tipos, formatos, restricciones) → `docs/learning/swagger.md`
+- [x] Content-Type: application/json vs text/json vs text/plain → `docs/learning/swagger.md`
 
 ---
 
 ## Fase 8 — Error handling global
 
-- [ ] **[TEST]** Ruta inexistente → 404 (escribir test → falla)
-- [ ] **[TEST]** Error interno → 500 sin datos sensibles (escribir test → falla)
-- [ ] Crear `ExceptionMiddleware`
-- [ ] Mapear `KeyNotFoundException` → 404
-- [ ] Capturar errores no controlados → 500 genérico (sin stack trace)
-- [ ] Registrar middleware en el pipeline (Program.cs)
+- [x] **[TEST]** Ruta inexistente → 404 (escribir test → falla)
+- [x] **[TEST]** Error interno → 500 sin datos sensibles (escribir test → falla)
+- [x] Crear `ExceptionMiddleware`
+- [x] Mapear `KeyNotFoundException` → 404
+- [x] Capturar errores no controlados → 500 genérico (sin stack trace)
+- [x] Registrar middleware en el pipeline (Program.cs)
 - [ ] → Tests GREEN
 - [ ] Commit 1: implementación de ExceptionMiddleware
 - [ ] Commit 2: tests + documentación de error handling
@@ -239,7 +242,7 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 | 4 — PUT /tasks | 11 | ✅ |
 | 5 — CI/CD + Linting | 11 | ✅ |
 | 6 — DELETE /tasks | 12 | ✅ |
-| 7 — Swagger | 9 | ⏳ |
+| 7 — Swagger | 9 | ✅ |
 | 8 — Error handling | 12 | ⏳ |
 | 9 — Cierre | 8 | ⏳ |
 

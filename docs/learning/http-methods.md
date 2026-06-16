@@ -116,6 +116,37 @@ Content-Type: application/json
 | `BadRequest()` | 400 | Datos inválidos (validación) |
 | `NotFound()` | 404 | Recurso no encontrado |
 
+## DELETE: error vs silencio
+
+Cuando el cliente pide borrar un recurso que no existe, hay dos posturas:
+
+| Postura | Respuesta | Qué le dice al cliente |
+|---|---|---|
+| **Silencio** | `204 NoContent` | "Se hizo, no pasa nada" — aunque el recurso nunca existió |
+| **Error** | `404 NotFound` | "Ese recurso no existe, revisá el ID" |
+
+Elegimos **error (404)** por consistencia con GET y PUT, y porque `Task<bool>` nos permite distinguir:
+
+```csharp
+[HttpDelete("{id:guid}")]
+public async Task<IActionResult> Delete(Guid id)
+{
+    var deleted = await _taskService.DeleteAsync(id);
+
+    if (!deleted)
+        return NotFound();       // error: no existía
+
+    return NoContent();          // silencio: se eliminó
+}
+```
+
+La firma con `Task<bool>` es intencional:
+
+- `true` → el recurso existía y se eliminó → `204`
+- `false` → el recurso no existía → `404`
+
+La alternativa habría sido `Task<TaskItem?>` (devolver null si no existe), pero `bool` es más simple porque al controller solo le importa "existía o no", no los datos del objeto eliminado.
+
 ## Por qué 404 y no null
 
 Cuando `GetByIdAsync` devuelve `null`, el controller **decide** qué código HTTP usar. Devuelve **404 NotFound** porque desde la perspectiva HTTP el recurso no existe. Si devolvieras `Ok(null)` sería 200 con body null, lo cual confunde al cliente.

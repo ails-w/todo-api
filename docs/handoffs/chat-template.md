@@ -1,12 +1,12 @@
 # Handoff — Estado actual del proyecto
 
-> Última actualización: 2026-06-13 — Sesión 6b
+> Última actualización: 2026-06-15 — Sesión 7
 
 ## Objetivo actual
 
-✅ **Fase 6 completada** (DELETE /tasks/{id}).  
-🎯 **Próximo objetivo: arrancar Fase 7 — Swagger / OpenAPI.**  
-La Fase 6 incluyó: DELETE implementado con TDD (repositorio, servicio, controller), tests de integración, 11/11 tests pasando. PR #2 lista para crear.
+✅ **Fase 7 completada** (Swagger / OpenAPI).  
+🎯 **Próximo objetivo: arrancar Fase 8 — Error handling global.**  
+La Fase 7 incluyó: Swashbuckle.AspNetCore instalado, Swagger configurado con título/descripción personalizados, tests TDD de integración (endpoints + schemas), 13/13 tests pasando. PR #3 lista para crear.
 
 ## Estado actual
 
@@ -45,14 +45,22 @@ La Fase 6 incluyó: DELETE implementado con TDD (repositorio, servicio, controll
   - Tests: DELETE existente → 204, DELETE inexistente → 404
   - `dotnet test` → 11/11 ✅
   - PR #2 lista con cambios acumulados (Fase 6)
+- [x] **Fase 7: Swagger / OpenAPI** — completa
+  - `Swashbuckle.AspNetCore` 10.2.1 instalado
+  - Swagger configurado: `AddSwaggerGen`, `UseSwagger`, `UseSwaggerUI`
+  - Título "Todo API", descripción "API REST para gestionar tareas", versión "v1.0.0"
+  - `UseHttpsRedirection` condicional (solo en producción)
+  - Tests TDD: `SwaggerEndpointTests.cs` (endpoints + schemas)
+  - Probados todos los endpoints desde Swagger UI (GET, POST, PUT, DELETE)
+  - `dotnet test` → 13/13 ✅
 
 ### 🔄 En progreso
 
-- Nada — Fase 6 completada, Fase 7 lista para arrancar
+- Nada — Fase 7 completada, Fase 8 lista para arrancar
 
 ### ⏳ Próxima tarea
 
-**Fase 7 — Swagger / OpenAPI.** Arrancar configuración de Swagger UI y personalización.
+**Fase 8 — Error handling global.** Crear middleware de excepciones y tests.
 
 ## Archivos que se deben leer primero
 
@@ -61,17 +69,15 @@ La Fase 6 incluyó: DELETE implementado con TDD (repositorio, servicio, controll
 3. `docs/project-state.md`
 4. `docs/architecture/0001-architecture.md`
 5. `docs/handoffs/chat-template.md` (este archivo)
-6. `docs/checklists/project-phases.md` (Fase 6 — DELETE /tasks/{id})
+6. `docs/checklists/project-phases.md` (Fase 7 — Swagger / OpenAPI)
 7. `docs/learning/testing.md` (patrón de tests)
-8. `docs/learning/http-methods.md` (DELETE semántica)
+8. `docs/learning/swagger.md` (conceptos de OpenAPI / Swagger)
 
-Luego leer los archivos específicos para la implementación (Fase 6):
+Luego leer los archivos específicos para la implementación (Fase 8):
+- `src/TodoApi.Api/Program.cs`
 - `src/TodoApi.Api/Controllers/TasksController.cs`
-- `src/TodoApi.Api/Features/Tasks/Contracts/ITaskRepository.cs`
-- `src/TodoApi.Api/Infrastructure/InMemory/InMemoryTaskRepository.cs`
-- `src/TodoApi.Api/Features/Tasks/Services/ITaskService.cs`
-- `src/TodoApi.Api/Features/Tasks/Services/TaskService.cs`
 - `tests/TodoApi.Tests/TasksControllerTests.cs`
+- `tests/TodoApi.Tests/SwaggerEndpointTests.cs`
 
 ## Decisiones ya tomadas
 
@@ -93,10 +99,14 @@ Luego leer los archivos específicos para la implementación (Fase 6):
 | `[FromBody]` explícito en endpoints con ruta + body | `TasksController.cs` |
 | `Task<bool>` para DeleteAsync (booleano, no null) | `ITaskRepository.cs` |
 | DELETE → 204 NoContent, 404 si no existe | `TasksController.cs` |
+| Swashbuckle.AspNetCore 10.x para OpenAPI/Swagger | `Program.cs` |
+| `Microsoft.OpenApi` namespace (v2.x, no `Models`) | `Program.cs` |
+| `UseHttpsRedirection` solo en producción | `Program.cs` |
+| Título "Todo API", descripción "API REST para gestionar tareas" | `Program.cs` |
 
 ## Qué NO debe hacer esta sesión
 
-- NO tocar middleware de errores (Fase 8)
+- NO tocar middleware de errores (Fase 8 — ya hay handoff)
 - NO instalar paquetes NuGet sin consultar
 - NO borrar archivos de tests existentes sin confirmación
 - NO modificar los workflows de CI/CD sin necesidad
@@ -118,7 +128,7 @@ Luego leer los archivos específicos para la implementación (Fase 6):
 
 Antes de terminar, asegurarse de haber actualizado:
 - [x] `docs/project-state.md`
-- [x] `docs/progress/2026-06-13.md`
-- [x] `docs/learning/http-methods.md` — DELETE semántica y ejemplo
-- [x] `docs/checklists/project-phases.md` (Fase 6 marcada como completada)
+- [x] `docs/progress/2026-06-15.md`
+- [x] `docs/learning/swagger.md` — OpenAPI / Swagger conceptos
+- [x] `docs/checklists/project-phases.md` (Fase 7 marcada como completada)
 - [x] Este archivo (handoff actualizado)

@@ -2,8 +2,8 @@
 
 ## Estado actual
 
-Fase: **6 — DELETE /tasks/{id} (completada)**.  
-DELETE implementado con TDD: `DeleteAsync` en repositorio, servicio y controller. 11/11 tests pasando.
+Fase: **7 — Swagger / OpenAPI (en progreso)**.  
+Swagger configurado con Swashbuckle.AspNetCore 10.2.1. Tests de integración verifican endpoints, schemas y metadatos. 13/13 tests pasando.
 
 ## Qué ya está definido
 
@@ -79,6 +79,15 @@ DELETE implementado con TDD: `DeleteAsync` en repositorio, servicio y controller
 - [x] Tests: DELETE existente → 204 + verificación de eliminación, DELETE inexistente → 404
 - [x] `dotnet test` → 11/11 ✅
 
+## Qué ya está implementado (Fase 7)
+
+- [x] Paquete `Swashbuckle.AspNetCore` 10.2.1 instalado
+- [x] Swagger configurado: `AddSwaggerGen`, `UseSwagger`, `UseSwaggerUI`
+- [x] Título y descripción personalizados: "Todo API", "API REST para gestionar tareas", v1.0.0
+- [x] `UseHttpsRedirection` condicional (solo en producción)
+- [x] Tests: verifica 200 OK + endpoints listados + schemas de DTOs
+- [x] `dotnet test` → 13/13 ✅
+
 ## Próximas fases
 
 | Fase | Estado |
@@ -88,7 +97,7 @@ DELETE implementado con TDD: `DeleteAsync` en repositorio, servicio y controller
 | 4 — PUT /tasks | ✅ Completada |
 | 5 — CI/CD + Linting | ✅ Completada |
 | 6 — DELETE /tasks | ✅ Completada |
-| 7 — Swagger | ⏳ Pendiente |
+| 7 — Swagger | ✅ Completada |
 | 8 — Error handling | ⏳ Pendiente |
 | 9 — Cierre | ⏳ Pendiente |
 
@@ -96,17 +105,16 @@ DELETE implementado con TDD: `DeleteAsync` en repositorio, servicio y controller
 
 No hay bloqueos técnicos en este momento.
 
-## Última sesión (2026-06-13, sesión 6)
+## Última sesión (2026-06-15, sesión 7)
 
-- se creó `.editorconfig` y `Directory.Build.props` con analizadores de .NET
-- se reemplazaron los workflows placeholder por pipelines reales (build, test, formato)
-- se corrigió el formato automático con `dotnet format`
-- se verificaron los workflows en GitHub Actions (ambos success)
-- se creó la PR #1 con la plantilla del repositorio
-- se documentaron los conceptos: GitHub Actions y analizadores integrados de .NET
-- se implementó DELETE /tasks/{id} con TDD (repositorio, servicio, controller, tests)
-- `dotnet test` → 11/11 ✅
+- se instaló `Swashbuckle.AspNetCore` 10.2.1
+- se configuró Swagger en Program.cs con título y descripción personalizados
+- se desactivó `UseHttpsRedirection` en desarrollo
+- se escribieron tests TDD para Swagger: endpoints listados y schemas de DTOs
+- se probaron todos los endpoints manualmente desde Swagger UI
+- se documentaron los conceptos en `docs/learning/swagger.md`
+- `dotnet test` → 13/13 ✅
 
 ## Siguiente paso
 
-Arrancar Fase 7 — Swagger / OpenAPI.
+Arrancar Fase 8 — Error handling global.
