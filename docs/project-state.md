@@ -2,8 +2,8 @@
 
 ## Estado actual
 
-Fase: **7 — Swagger / OpenAPI (en progreso)**.  
-Swagger configurado con Swashbuckle.AspNetCore 10.2.1. Tests de integración verifican endpoints, schemas y metadatos. 13/13 tests pasando.
+Fase: **8 — Error handling global (completada)**.  
+Middleware centralizado `ExceptionMiddleware` implementado. Todos los errores devuelven respuestas JSON consistentes y seguras, sin exponer stack traces. 15/15 tests pasando.
 
 ## Qué ya está definido
 
@@ -88,6 +88,17 @@ Swagger configurado con Swashbuckle.AspNetCore 10.2.1. Tests de integración ver
 - [x] Tests: verifica 200 OK + endpoints listados + schemas de DTOs
 - [x] `dotnet test` → 13/13 ✅
 
+## Qué ya está implementado (Fase 8)
+
+- [x] `ExceptionMiddleware`: middleware global que captura excepciones en todo el pipeline
+- [x] `KeyNotFoundException` → 404 con cuerpo JSON consistente
+- [x] Errores no controlados → 500 con JSON genérico (sin stack trace)
+- [x] Respuestas 404 sin cuerpo reciben JSON consistente (post-procesamiento)
+- [x] Middleware registrado como PRIMERO en el pipeline de Program.cs
+- [x] Tests: ruta inexistente → 404 + JSON, error interno → 500 + JSON sin datos sensibles
+- [x] `ErrorTestController` en tests (via `AddApplicationPart`) para simular errores sin tocar producción
+- [x] `dotnet test` → 15/15 ✅
+
 ## Próximas fases
 
 | Fase | Estado |
@@ -98,23 +109,24 @@ Swagger configurado con Swashbuckle.AspNetCore 10.2.1. Tests de integración ver
 | 5 — CI/CD + Linting | ✅ Completada |
 | 6 — DELETE /tasks | ✅ Completada |
 | 7 — Swagger | ✅ Completada |
-| 8 — Error handling | ⏳ Pendiente |
+| 8 — Error handling | ✅ Completada |
 | 9 — Cierre | ⏳ Pendiente |
 
 ## Bloqueos
 
 No hay bloqueos técnicos en este momento.
 
-## Última sesión (2026-06-15, sesión 7)
+## Última sesión (2026-06-16, sesión 8)
 
-- se instaló `Swashbuckle.AspNetCore` 10.2.1
-- se configuró Swagger en Program.cs con título y descripción personalizados
-- se desactivó `UseHttpsRedirection` en desarrollo
-- se escribieron tests TDD para Swagger: endpoints listados y schemas de DTOs
-- se probaron todos los endpoints manualmente desde Swagger UI
-- se documentaron los conceptos en `docs/learning/swagger.md`
-- `dotnet test` → 13/13 ✅
+- se implementó `ExceptionMiddleware` global con try/catch envolviendo el pipeline
+- se mapeó `KeyNotFoundException` → 404 JSON
+- se capturaron errores no controlados → 500 JSON genérico (sin stack trace)
+- se agregó post-procesamiento para respuestas 404 sin cuerpo
+- se registró el middleware al inicio del pipeline
+- se escribieron tests TDD: ruta inexistente → 404 JSON, error interno → 500 sin datos sensibles
+- se documentaron los conceptos en `docs/learning/middleware.md`
+- `dotnet test` → 15/15 ✅
 
 ## Siguiente paso
 
-Arrancar Fase 8 — Error handling global.
+Arrancar Fase 9 — Cierre y documentación final.

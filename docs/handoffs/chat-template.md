@@ -1,12 +1,12 @@
 # Handoff — Estado actual del proyecto
 
-> Última actualización: 2026-06-15 — Sesión 7
+> Última actualización: 2026-06-16 — Sesión 8
 
 ## Objetivo actual
 
-✅ **Fase 7 completada** (Swagger / OpenAPI).  
-🎯 **Próximo objetivo: arrancar Fase 8 — Error handling global.**  
-La Fase 7 incluyó: Swashbuckle.AspNetCore instalado, Swagger configurado con título/descripción personalizados, tests TDD de integración (endpoints + schemas), 13/13 tests pasando. PR #3 lista para crear.
+✅ **Fase 8 completada** (Error handling global).  
+🎯 **Próximo objetivo: arrancar Fase 9 — Cierre y documentación final.**  
+La Fase 8 incluyó: `ExceptionMiddleware` global, `KeyNotFoundException` → 404 JSON, errores no controlados → 500 JSON sin stack trace, post-procesamiento de 404 sin cuerpo, tests TDD, 15/15 tests pasando. PR #3 actualizada con Fase 7 + Fase 8.
 
 ## Estado actual
 
@@ -53,14 +53,23 @@ La Fase 7 incluyó: Swashbuckle.AspNetCore instalado, Swagger configurado con t�
   - Tests TDD: `SwaggerEndpointTests.cs` (endpoints + schemas)
   - Probados todos los endpoints desde Swagger UI (GET, POST, PUT, DELETE)
   - `dotnet test` → 13/13 ✅
+- [x] **Fase 8: Error handling global** — completa
+  - `ExceptionMiddleware` global con try/catch envolviendo el pipeline
+  - `KeyNotFoundException` → 404 JSON
+  - Errores no controlados → 500 JSON genérico (sin stack trace)
+  - Post-procesamiento: respuestas 404 sin cuerpo reciben JSON consistente
+  - Middleware registrado al inicio del pipeline en `Program.cs`
+  - Tests TDD: `ErrorHandlingTests.cs` (ruta inexistente → 404 JSON, error interno → 500 sin datos sensibles)
+  - `ErrorTestController` en tests via `AddApplicationPart`
+  - `dotnet test` → 15/15 ✅
 
 ### 🔄 En progreso
 
-- Nada — Fase 7 completada, Fase 8 lista para arrancar
+- Nada — Fase 8 completada, Fase 9 lista para arrancar
 
 ### ⏳ Próxima tarea
 
-**Fase 8 — Error handling global.** Crear middleware de excepciones y tests.
+**Fase 9 — Cierre y documentación final.**
 
 ## Archivos que se deben leer primero
 
@@ -69,15 +78,17 @@ La Fase 7 incluyó: Swashbuckle.AspNetCore instalado, Swagger configurado con t�
 3. `docs/project-state.md`
 4. `docs/architecture/0001-architecture.md`
 5. `docs/handoffs/chat-template.md` (este archivo)
-6. `docs/checklists/project-phases.md` (Fase 7 — Swagger / OpenAPI)
+6. `docs/checklists/project-phases.md` (Fase 8 — Error handling global)
 7. `docs/learning/testing.md` (patrón de tests)
 8. `docs/learning/swagger.md` (conceptos de OpenAPI / Swagger)
+9. `docs/learning/middleware.md` (conceptos de middleware pipeline)
 
-Luego leer los archivos específicos para la implementación (Fase 8):
+Luego leer los archivos específicos para la implementación (Fase 9):
 - `src/TodoApi.Api/Program.cs`
+- `src/TodoApi.Api/Middleware/ExceptionMiddleware.cs`
 - `src/TodoApi.Api/Controllers/TasksController.cs`
 - `tests/TodoApi.Tests/TasksControllerTests.cs`
-- `tests/TodoApi.Tests/SwaggerEndpointTests.cs`
+- `tests/TodoApi.Tests/ErrorHandlingTests.cs`
 
 ## Decisiones ya tomadas
 
@@ -103,10 +114,13 @@ Luego leer los archivos específicos para la implementación (Fase 8):
 | `Microsoft.OpenApi` namespace (v2.x, no `Models`) | `Program.cs` |
 | `UseHttpsRedirection` solo en producción | `Program.cs` |
 | Título "Todo API", descripción "API REST para gestionar tareas" | `Program.cs` |
+| ExceptionMiddleware al inicio del pipeline (antes que cualquier otro middleware) | `Program.cs` |
+| `ErrorResponse` record para respuestas de error uniformes | `ExceptionMiddleware.cs` |
+| `ErrorTestController` via `AddApplicationPart` (solo en tests) | `ErrorHandlingTests.cs` |
 
 ## Qué NO debe hacer esta sesión
 
-- NO tocar middleware de errores (Fase 8 — ya hay handoff)
+- NO saltarse el orden de fases (Fase 9 es la última)
 - NO instalar paquetes NuGet sin consultar
 - NO borrar archivos de tests existentes sin confirmación
 - NO modificar los workflows de CI/CD sin necesidad
@@ -128,7 +142,7 @@ Luego leer los archivos específicos para la implementación (Fase 8):
 
 Antes de terminar, asegurarse de haber actualizado:
 - [x] `docs/project-state.md`
-- [x] `docs/progress/2026-06-15.md`
-- [x] `docs/learning/swagger.md` — OpenAPI / Swagger conceptos
-- [x] `docs/checklists/project-phases.md` (Fase 7 marcada como completada)
+- [x] `docs/progress/2026-06-16.md`
+- [x] `docs/learning/middleware.md` — Middleware pipeline conceptos
+- [x] `docs/checklists/project-phases.md` (Fase 8 marcada como completada)
 - [x] Este archivo (handoff actualizado)

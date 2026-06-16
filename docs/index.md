@@ -33,6 +33,7 @@ Aprender ASP.NET Core básico construyendo una API de tareas con:
 - `Controllers/` → endpoints HTTP
 - `Features/Tasks/` → funcionalidad de tareas
 - `Infrastructure/InMemory/` → almacenamiento temporal
+- `Middleware/` → middlewares globales (ExceptionMiddleware)
 - `Extensions/` → configuración y extensiones
 
 ### `tests/TodoApi.Tests/`

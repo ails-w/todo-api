@@ -203,18 +203,18 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 - [x] Mapear `KeyNotFoundException` → 404
 - [x] Capturar errores no controlados → 500 genérico (sin stack trace)
 - [x] Registrar middleware en el pipeline (Program.cs)
-- [ ] → Tests GREEN
-- [ ] Commit 1: implementación de ExceptionMiddleware
-- [ ] Commit 2: tests + documentación de error handling
-- [ ] → Pedir al chat una propuesta de PR con los cambios acumulados desde el último PR
-- [ ] Documentar conceptos en `docs/learning/`
-- [ ] Actualizar `docs/progress/` y `docs/project-state.md`
+- [x] → Tests GREEN (15/15)
+- [x] Commit 1: implementación de ExceptionMiddleware (`f357e64`)
+- [x] Commit 2: tests + documentación de error handling (`8c18b40`)
+- [x] → Pedir al chat una propuesta de PR con los cambios acumulados desde el último PR
+- [x] Documentar conceptos en `docs/learning/` → `docs/learning/middleware.md`
+- [x] Actualizar `docs/progress/` y `docs/project-state.md`
 
-### Conceptos a aprender
+### Conceptos aprendidos
 
-- [ ] Middleware pipeline en ASP.NET Core
-- [ ] Excepciones vs resultados HTTP
-- [ ] Seguridad: no exponer stack traces
+- [x] Middleware pipeline en ASP.NET Core → `docs/learning/middleware.md`
+- [x] Excepciones vs resultados HTTP → `docs/learning/middleware.md`
+- [x] Seguridad: no exponer stack traces → `docs/learning/middleware.md`
 
 ---
 
