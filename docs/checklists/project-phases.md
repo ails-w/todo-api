@@ -203,31 +203,38 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 - [x] Mapear `KeyNotFoundException` → 404
 - [x] Capturar errores no controlados → 500 genérico (sin stack trace)
 - [x] Registrar middleware en el pipeline (Program.cs)
-- [ ] → Tests GREEN
-- [ ] Commit 1: implementación de ExceptionMiddleware
-- [ ] Commit 2: tests + documentación de error handling
-- [ ] → Pedir al chat una propuesta de PR con los cambios acumulados desde el último PR
-- [ ] Documentar conceptos en `docs/learning/`
-- [ ] Actualizar `docs/progress/` y `docs/project-state.md`
+- [x] → Tests GREEN (15/15)
+- [x] Commit 1: implementación de ExceptionMiddleware (`f357e64`)
+- [x] Commit 2: tests + documentación de error handling (`8c18b40`)
+- [x] → Pedir al chat una propuesta de PR con los cambios acumulados desde el último PR
+- [x] Documentar conceptos en `docs/learning/` → `docs/learning/middleware.md`
+- [x] Actualizar `docs/progress/` y `docs/project-state.md`
 
-### Conceptos a aprender
+### Conceptos aprendidos
 
-- [ ] Middleware pipeline en ASP.NET Core
-- [ ] Excepciones vs resultados HTTP
-- [ ] Seguridad: no exponer stack traces
+- [x] Middleware pipeline en ASP.NET Core → `docs/learning/middleware.md`
+- [x] Excepciones vs resultados HTTP → `docs/learning/middleware.md`
+- [x] Seguridad: no exponer stack traces → `docs/learning/middleware.md`
 
 ---
 
-## Fase 9 — Cierre y documentación final
+## Fase 9 — Cierre y documentación final ✅
 
-- [ ] Revisar que todas las fases estén completas
-- [ ] Actualizar `docs/project-state.md` con resumen final
-- [ ] Documentar último progreso en `docs/progress/`
-- [ ] Revisar `docs/learning/` — documentar conceptos pendientes
-- [ ] Commit 1: actualización de documentación final
-- [ ] Commit 2: handoff listo para próxima etapa
-- [ ] → Pedir al chat una propuesta de PR final con todo el proyecto
-- [ ] Dejar handoff listo para próxima etapa (si aplica)
+- [x] Revisar que todas las fases estén completas
+- [x] Actualizar `docs/project-state.md` con resumen final
+- [x] Documentar último progreso en `docs/progress/` (2026-06-16-v2.md)
+- [x] Revisar `docs/learning/` — documentar conceptos pendientes
+  - [x] `json.md` — actualizado con contenido real del proyecto
+  - [x] `aspnet-core-project.md` — corregida referencia a Minimal API vs Controllers
+  - [x] `interfaces.md` — corregido diagrama de estructura (ITaskService en Services/)
+  - [x] `feature-first.md` — corregido diagrama de estructura
+- [x] Fusionar arquitectura en `docs/index.md`
+- [x] Eliminar `src/TodoApi.Api/Extensions/` (no usado)
+- [x] Crear `docs/_template/README.md` — plantilla genérica de estructura de proyecto
+- [x] Actualizar `.gitignore` para excluir `docs/_template/`
+- [x] Commit único de cierre
+- [x] PR final: [#4](https://github.com/ails-w/todo-api/pull/4)
+- [x] Dejar handoff listo para próxima etapa
 
 ---
 
@@ -243,8 +250,8 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 | 5 — CI/CD + Linting | 11 | ✅ |
 | 6 — DELETE /tasks | 12 | ✅ |
 | 7 — Swagger | 9 | ✅ |
-| 8 — Error handling | 12 | ⏳ |
-| 9 — Cierre | 8 | ⏳ |
+| 8 — Error handling | 12 | ✅ |
+| 9 — Cierre | 12 | ✅ |
 
 ---
 

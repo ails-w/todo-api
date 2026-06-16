@@ -13,13 +13,14 @@ Controllers/
 Features/
 └── Tasks/                      ← feature completa
     ├── Contracts/              ← interfaces del feature
-    │   ├── ITaskRepository.cs
-    │   └── ITaskService.cs
+    │   └── ITaskRepository.cs
     ├── Domain/                 ← modelos de dominio
     │   └── TaskItem.cs
     ├── Dtos/                   ← DTOs de entrada y salida
-    │   └── TaskResponse.cs
-    └── Services/               ← lógica de aplicación
+    │   ├── CreateTaskRequest.cs
+    │   ├── TaskResponse.cs
+    │   └── UpdateTaskRequest.cs
+    └── Services/               ← lógica de aplicación (interfaz + implementación)
         ├── ITaskService.cs
         └── TaskService.cs
 

@@ -2,18 +2,8 @@
 
 ## Estado actual
 
-Fase: **7 — Swagger / OpenAPI (en progreso)**.  
-Swagger configurado con Swashbuckle.AspNetCore 10.2.1. Tests de integración verifican endpoints, schemas y metadatos. 13/13 tests pasando.
-
-## Qué ya está definido
-
-- [x] el objetivo de aprendizaje
-- [x] la estructura base del repositorio
-- [x] el mapa central del proyecto
-- [x] la estrategia de documentación para trabajo multi-chat
-- [x] la decisión de arquitectura (API simple con feature-first)
-- [x] los checklists operativos (start-session, implementation, review, before-merge, close-session)
-- [x] el checklist general de fases del proyecto (reestructurado con tests primero)
+**✅ Proyecto completado.**  
+Fases 0 a 9 completadas. 15/15 tests pasando. API CRUD funcional con Swagger, error handling global, CI/CD, y documentación viva.
 
 ## Qué ya está implementado (Fase 1)
 
@@ -88,33 +78,64 @@ Swagger configurado con Swashbuckle.AspNetCore 10.2.1. Tests de integración ver
 - [x] Tests: verifica 200 OK + endpoints listados + schemas de DTOs
 - [x] `dotnet test` → 13/13 ✅
 
-## Próximas fases
+## Qué ya está implementado (Fase 8)
+
+- [x] `ExceptionMiddleware`: middleware global que captura excepciones en todo el pipeline
+- [x] `KeyNotFoundException` → 404 con cuerpo JSON consistente
+- [x] Errores no controlados → 500 con JSON genérico (sin stack trace)
+- [x] Respuestas 404 sin cuerpo reciben JSON consistente (post-procesamiento)
+- [x] Middleware registrado como PRIMERO en el pipeline de Program.cs
+- [x] Tests: ruta inexistente → 404 + JSON, error interno → 500 + JSON sin datos sensibles
+- [x] `ErrorTestController` en tests (via `AddApplicationPart`) para simular errores sin tocar producción
+- [x] `dotnet test` → 15/15 ✅
+
+## Fases del proyecto
 
 | Fase | Estado |
 |---|---|
-| 2 — GET /tasks | ✅ Completada |
-| 3 — POST /tasks | ✅ Completada |
-| 4 — PUT /tasks | ✅ Completada |
-| 5 — CI/CD + Linting | ✅ Completada |
-| 6 — DELETE /tasks | ✅ Completada |
-| 7 — Swagger | ✅ Completada |
-| 8 — Error handling | ⏳ Pendiente |
-| 9 — Cierre | ⏳ Pendiente |
+| 0 — Fundaciones | ✅ |
+| 1 — Scaffolding | ✅ |
+| 2 — GET /tasks | ✅ |
+| 3 — POST /tasks | ✅ |
+| 4 — PUT /tasks | ✅ |
+| 5 — CI/CD + Linting | ✅ |
+| 6 — DELETE /tasks | ✅ |
+| 7 — Swagger | ✅ |
+| 8 — Error handling | ✅ |
+| 9 — Cierre | ✅ |
 
 ## Bloqueos
 
 No hay bloqueos técnicos en este momento.
 
-## Última sesión (2026-06-15, sesión 7)
+## Última sesión (2026-06-16, sesión 9)
 
-- se instaló `Swashbuckle.AspNetCore` 10.2.1
-- se configuró Swagger en Program.cs con título y descripción personalizados
-- se desactivó `UseHttpsRedirection` en desarrollo
-- se escribieron tests TDD para Swagger: endpoints listados y schemas de DTOs
-- se probaron todos los endpoints manualmente desde Swagger UI
-- se documentaron los conceptos en `docs/learning/swagger.md`
-- `dotnet test` → 13/13 ✅
+- Revisión de completitud de todas las fases
+- Revisión y corrección de learning docs (json.md, aspnet-core-project.md, interfaces.md, feature-first.md)
+- README.md reescrito con estado real del proyecto
+- Creación de `docs/_template/README.md` — plantilla genérica de estructura de proyecto
+- Fusión de arquitectura en `docs/index.md`
+- Eliminación de `src/TodoApi.Api/Extensions/` (no usado)
+- Commits finales de cierre y PR #4
+
+## Resumen final del proyecto
+
+| Aspecto | Detalle |
+|---|---|
+| **API** | REST CRUD completa (GET, POST, PUT, DELETE) + Swagger UI |
+| **Patrones** | Feature-first, Repository, Service, DTOs |
+| **Validación** | Data Annotations en requests de entrada |
+| **Error handling** | ExceptionMiddleware global con respuestas JSON uniformes |
+| **Tests** | 15/15 — Integración con WebApplicationFactory, TDD |
+| **CI/CD** | GitHub Actions: build + lint + test en push y PR |
+| **Stack** | .NET 10, ASP.NET Core, xUnit, Swashbuckle 10.x |
+| **Documentación** | Arquitectura, learning docs, checklists, handoffs |
 
 ## Siguiente paso
 
-Arrancar Fase 8 — Error handling global.
+El proyecto está completo. Próximas extensiones posibles:
+- Base de datos real con Entity Framework Core
+- Paginación en GET /tasks
+- Autenticación JWT
+- Frontend (Blazor, React, etc.)
+- Despliegue (Docker, Azure)

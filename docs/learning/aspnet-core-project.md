@@ -15,18 +15,18 @@ Un proyecto ASP.NET Core es una aplicación que corre sobre el runtime de ASP.NE
 | `appsettings.Development.json` | Configuración específica para desarrollo — pisa valores de `appsettings.json` |
 | `TodoApi.Api.http` | Archivo para probar endpoints con REST Client (VS Code, Rider) |
 
-## Program.cs y Minimal API
+## Program.cs y Controllers
 
-Desde .NET 6, el template usa **Minimal API** (sin `Startup.cs`). Todo se configura en `Program.cs`:
+Desde .NET 6, el template usa **Minimal API** (sin `Startup.cs`). Todo se configura en `Program.cs`. Pero este proyecto eligió la arquitectura **Controllers** desde el inicio:
 
 ```csharp
 var builder = WebApplication.CreateBuilder(args);  // Configura servicios
 var app = builder.Build();                           // Construye la app
-app.MapGet("/ruta", () => { ... });                  // Define endpoints
+app.MapControllers();                                // Activa routing por atributos
 app.Run();                                           // Inicia el servidor
 ```
 
-En fases posteriores reemplazaremos `MapGet` por Controllers tradicionales.
+La diferencia clave: con Controllers, los endpoints se definen en clases separadas dentro de `Controllers/` usando atributos como `[HttpGet]`, `[HttpPost]`, etc. Esto da mejor organización cuando la API crece.
 
 ## appsettings.json
 
