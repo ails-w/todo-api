@@ -197,12 +197,12 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 
 ## Fase 8 — Error handling global
 
-- [ ] **[TEST]** Ruta inexistente → 404 (escribir test → falla)
-- [ ] **[TEST]** Error interno → 500 sin datos sensibles (escribir test → falla)
-- [ ] Crear `ExceptionMiddleware`
-- [ ] Mapear `KeyNotFoundException` → 404
-- [ ] Capturar errores no controlados → 500 genérico (sin stack trace)
-- [ ] Registrar middleware en el pipeline (Program.cs)
+- [x] **[TEST]** Ruta inexistente → 404 (escribir test → falla)
+- [x] **[TEST]** Error interno → 500 sin datos sensibles (escribir test → falla)
+- [x] Crear `ExceptionMiddleware`
+- [x] Mapear `KeyNotFoundException` → 404
+- [x] Capturar errores no controlados → 500 genérico (sin stack trace)
+- [x] Registrar middleware en el pipeline (Program.cs)
 - [ ] → Tests GREEN
 - [ ] Commit 1: implementación de ExceptionMiddleware
 - [ ] Commit 2: tests + documentación de error handling
