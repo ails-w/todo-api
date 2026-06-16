@@ -1,45 +1,123 @@
 # Todo API
 
-Repositorio de aprendizaje para construir una API de tareas con ASP.NET Core.
+API REST para gestionar tareas, construida con ASP.NET Core como proyecto de aprendizaje progresivo.
 
 ## Estado actual
 
-El proyecto está en **fase de estructura y documentación**.  
-Todavía **no** se ha iniciado la implementación de la API.
+**Fase 9 — Cierre y documentación** 🏗️
 
-## Objetivo
+Todas las fases de implementación están completas. API CRUD funcional con Swagger, error handling global, CI/CD, y 15/15 tests pasando.
 
-Aprender, de forma ordenada y progresiva:
+## Features implementadas
 
-- ASP.NET Core Web API
-- Controllers y routing
-- HTTP methods
-- JSON
-- Dependency Injection
-- DTOs
-- Swagger
-- pruebas
+| Feature | Endpoint | Estado |
+|---|---|---|
+| Listar tareas | `GET /api/tasks` | ✅ |
+| Obtener tarea por ID | `GET /api/tasks/{id}` | ✅ |
+| Crear tarea | `POST /api/tasks` | ✅ |
+| Actualizar tarea | `PUT /api/tasks/{id}` | ✅ |
+| Eliminar tarea | `DELETE /api/tasks/{id}` | ✅ |
+| Documentación interactiva | `GET /swagger` | ✅ |
+| Error handling global | Middleware `ExceptionMiddleware` | ✅ |
+| CI/CD | GitHub Actions (build + lint + test) | ✅ |
 
-## Dónde empezar
+## Stack
 
-1. `docs/index.md` — mapa central del proyecto
-2. `docs/project-state.md` — estado actual y siguiente paso
-3. `docs/architecture/0001-architecture.md` — decisión base de arquitectura
-4. `docs/handoffs/chat-template.md` — plantilla para continuar en otro chat
+| Capa | Tecnología |
+|---|---|
+| Runtime | .NET 10 + ASP.NET Core |
+| Tests | xUnit + WebApplicationFactory |
+| API Docs | Swashbuckle.AspNetCore 10.x (Swagger/OpenAPI) |
+| CI/CD | GitHub Actions |
+| Linting | .editorconfig + analizadores Roslyn |
 
-## Estructura general
+## Cómo empezar
 
-- `src/` — código de la aplicación
-- `tests/` — pruebas automatizadas
-- `docs/` — documentación viva y aprendizaje
-- `.github/` — workflows y plantillas de PR
+```bash
+# Clonar
+git clone https://github.com/ails-w/todo-api.git
+cd todo-api
 
-## Regla de trabajo
+# Build
+dotnet build
 
-Cada cambio importante debe dejar rastro en documentación:
+# Ejecutar
+dotnet run --project src/TodoApi.Api
 
-- avances en `docs/progress/`
-- estado en `docs/project-state.md`
-- conceptos en `docs/learning/`
-- decisiones en `docs/adr/`
+# Abrir Swagger UI
+# http://localhost:5158/swagger
 
+# Tests
+dotnet test
+```
+
+## Estructura del proyecto
+
+```
+TodoApi/
+├── src/TodoApi.Api/           ← Aplicación Web API
+│   ├── Controllers/           ← Punto de entrada HTTP
+│   ├── Features/Tasks/        ← Feature Tasks (feature-first)
+│   │   ├── Contracts/         ← Interfaces (ITaskRepository)
+│   │   ├── Domain/            ← Modelo de dominio (TaskItem)
+│   │   ├── Dtos/              ← DTOs de entrada/salida
+│   │   └── Services/          ← Lógica de aplicación
+│   ├── Infrastructure/        ← Implementaciones concretas
+│   │   └── InMemory/          ← Repositorio en memoria
+│   └── Middleware/             ← ExceptionMiddleware global
+├── tests/TodoApi.Tests/       ← Tests de integración
+└── docs/                      ← Documentación viva
+    ├── architecture/          ← Decisiones de arquitectura
+    ├── checklists/            ← Seguimiento de fases
+    ├── handoffs/              ← Handoffs entre sesiones
+    ├── learning/              ← Conceptos aprendidos por tema
+    └── progress/              ← Bitácora de progreso por sesión
+```
+
+## API Endpoints
+
+### `GET /api/tasks` — Listar todas las tareas
+
+```json
+// Response: 200 OK
+[
+  { "id": "guid", "title": "Comprar pan", "isCompleted": false }
+]
+```
+
+### `GET /api/tasks/{id}` — Obtener tarea por ID
+- `200 OK` + tarea si existe
+- `404 Not Found` si no existe
+
+### `POST /api/tasks` — Crear tarea
+
+```json
+// Request body:
+{ "title": "Nueva tarea", "isCompleted": false }
+
+// Response: 201 Created + Location: /api/tasks/{id}
+```
+
+### `PUT /api/tasks/{id}` — Actualizar tarea
+- `200 OK` + tarea actualizada si existe
+- `400 Bad Request` si el body es inválido
+- `404 Not Found` si no existe
+
+### `DELETE /api/tasks/{id}` — Eliminar tarea
+- `204 NoContent` si se eliminó
+- `404 Not Found` si no existe
+
+## Documentación
+
+- `docs/index.md` — Mapa central del proyecto
+- `docs/project-state.md` — Estado actual y resumen final
+- `docs/architecture/0001-architecture.md` — Decisiones de arquitectura
+- `docs/learning/` — Conceptos aprendidos organizados por tema
+- `docs/checklists/project-phases.md` — Seguimiento completo de fases
+
+## Reglas de trabajo
+
+- **TDD estricto**: test antes del código
+- **Feature-first**: organización por funcionalidad, no por capas
+- **Documentación viva**: cada avance deja rastro en `docs/progress/`
+- **Commits convencionales**: `feat:`, `fix:`, `docs:`, etc.

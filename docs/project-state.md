@@ -2,8 +2,8 @@
 
 ## Estado actual
 
-Fase: **8 — Error handling global (completada)**.  
-Middleware centralizado `ExceptionMiddleware` implementado. Todos los errores devuelven respuestas JSON consistentes y seguras, sin exponer stack traces. 15/15 tests pasando.
+Fase: **9 — Cierre y documentación final (en progreso)**.  
+Fases 0 a 8 completadas al 100%. 15/15 tests pasando. Proyecto listo para cerrar la documentación final y preparar entrega.
 
 ## Qué ya está definido
 
@@ -103,6 +103,8 @@ Middleware centralizado `ExceptionMiddleware` implementado. Todos los errores de
 
 | Fase | Estado |
 |---|---|
+| 0 — Fundaciones | ✅ Completada |
+| 1 — Scaffolding | ✅ Completada |
 | 2 — GET /tasks | ✅ Completada |
 | 3 — POST /tasks | ✅ Completada |
 | 4 — PUT /tasks | ✅ Completada |
@@ -110,7 +112,7 @@ Middleware centralizado `ExceptionMiddleware` implementado. Todos los errores de
 | 6 — DELETE /tasks | ✅ Completada |
 | 7 — Swagger | ✅ Completada |
 | 8 — Error handling | ✅ Completada |
-| 9 — Cierre | ⏳ Pendiente |
+| 9 — Cierre | 🏗️ En progreso |
 
 ## Bloqueos
 
@@ -127,6 +129,20 @@ No hay bloqueos técnicos en este momento.
 - se documentaron los conceptos en `docs/learning/middleware.md`
 - `dotnet test` → 15/15 ✅
 
+## Resumen final del proyecto
+
+| Aspecto | Detalle |
+|---|---|
+| **API** | REST CRUD completa (GET, POST, PUT, DELETE) + Swagger UI |
+| **Patrones** | Feature-first, Repository, Service, DTOs |
+| **Validación** | Data Annotations en requests de entrada |
+| **Error handling** | ExceptionMiddleware global con respuestas JSON uniformes |
+| **Tests** | 15/15 — Integración con WebApplicationFactory, TDD |
+| **CI/CD** | GitHub Actions: build + lint + test en push y PR |
+| **Stack** | .NET 10, ASP.NET Core, xUnit, Swashbuckle 10.x |
+| **Documentación** | Arquitectura, learning docs, checklists, handoffs |
+
 ## Siguiente paso
 
-Arrancar Fase 9 — Cierre y documentación final.
+Fase 9 — Cierre y documentación final (en progreso).  
+Tareas actuales: revisión de completitud, actualización de documentación, y preparación de PR final.

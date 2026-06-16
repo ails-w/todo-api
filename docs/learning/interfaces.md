@@ -65,14 +65,16 @@ En C#, las interfaces públicas por convención empiezan con `I`:
 Features/Tasks/
 ├── Contracts/          ← interfaces (contratos)
 │   ├── ITaskRepository.cs
-│   └── ITaskService.cs
+│   └── .gitkeep
 ├── Domain/             ← modelos de dominio
 │   └── TaskItem.cs
-├── Services/           ← implementaciones de servicios
+├── Services/           ← servicios de aplicación (interfaz + implementación)
 │   ├── ITaskService.cs (interfaz)
 │   └── TaskService.cs  (implementación)
 └── Dtos/               ← DTOs de entrada/salida
-    └── TaskResponse.cs
+    ├── CreateTaskRequest.cs
+    ├── TaskResponse.cs
+    └── UpdateTaskRequest.cs
 
 Infrastructure/         ← implementaciones de infraestructura
 └── InMemory/

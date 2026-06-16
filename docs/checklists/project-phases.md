@@ -220,10 +220,14 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 
 ## Fase 9 — Cierre y documentación final
 
-- [ ] Revisar que todas las fases estén completas
-- [ ] Actualizar `docs/project-state.md` con resumen final
-- [ ] Documentar último progreso en `docs/progress/`
-- [ ] Revisar `docs/learning/` — documentar conceptos pendientes
+- [x] Revisar que todas las fases estén completas
+- [x] Actualizar `docs/project-state.md` con resumen final
+- [x] Documentar último progreso en `docs/progress/` (2026-06-16-v2.md)
+- [x] Revisar `docs/learning/` — documentar conceptos pendientes
+  - [x] `json.md` — actualizado con contenido real del proyecto
+  - [x] `aspnet-core-project.md` — corregida referencia a Minimal API vs Controllers
+  - [x] `interfaces.md` — corregido diagrama de estructura (ITaskService en Services/)
+  - [x] `feature-first.md` — corregido diagrama de estructura
 - [ ] Commit 1: actualización de documentación final
 - [ ] Commit 2: handoff listo para próxima etapa
 - [ ] → Pedir al chat una propuesta de PR final con todo el proyecto
@@ -243,8 +247,8 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 | 5 — CI/CD + Linting | 11 | ✅ |
 | 6 — DELETE /tasks | 12 | ✅ |
 | 7 — Swagger | 9 | ✅ |
-| 8 — Error handling | 12 | ⏳ |
-| 9 — Cierre | 8 | ⏳ |
+| 8 — Error handling | 12 | ✅ |
+| 9 — Cierre | 8 | 🏗️ |
 
 ---
 
