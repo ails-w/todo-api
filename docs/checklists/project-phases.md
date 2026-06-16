@@ -228,9 +228,12 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
   - [x] `aspnet-core-project.md` — corregida referencia a Minimal API vs Controllers
   - [x] `interfaces.md` — corregido diagrama de estructura (ITaskService en Services/)
   - [x] `feature-first.md` — corregido diagrama de estructura
-- [x] Commit 1: `docs: finalize project documentation and cleanup (Fase 9)`
-- [x] Commit 2: `docs: update handoff for Phase 9 completion`
-- [x] → PR final: [#4](https://github.com/ails-w/todo-api/pull/4)
+- [x] Fusionar arquitectura en `docs/index.md`
+- [x] Eliminar `src/TodoApi.Api/Extensions/` (no usado)
+- [x] Crear `docs/_template/README.md` — plantilla genérica de estructura de proyecto
+- [x] Actualizar `.gitignore` para excluir `docs/_template/`
+- [x] Commit único de cierre
+- [x] PR final: [#4](https://github.com/ails-w/todo-api/pull/4)
 - [x] Dejar handoff listo para próxima etapa
 
 ---
@@ -248,7 +251,7 @@ Cada fase contiene tareas atómicas y verificables con checkbox para seguimiento
 | 6 — DELETE /tasks | 12 | ✅ |
 | 7 — Swagger | 9 | ✅ |
 | 8 — Error handling | 12 | ✅ |
-| 9 — Cierre | 8 | ✅ |
+| 9 — Cierre | 12 | ✅ |
 
 ---
 

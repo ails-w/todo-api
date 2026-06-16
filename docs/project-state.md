@@ -2,18 +2,8 @@
 
 ## Estado actual
 
-Fase: **9 — Cierre y documentación final (en progreso)**.  
-Fases 0 a 8 completadas al 100%. 15/15 tests pasando. Proyecto listo para cerrar la documentación final y preparar entrega.
-
-## Qué ya está definido
-
-- [x] el objetivo de aprendizaje
-- [x] la estructura base del repositorio
-- [x] el mapa central del proyecto
-- [x] la estrategia de documentación para trabajo multi-chat
-- [x] la decisión de arquitectura (API simple con feature-first)
-- [x] los checklists operativos (start-session, implementation, review, before-merge, close-session)
-- [x] el checklist general de fases del proyecto (reestructurado con tests primero)
+**✅ Proyecto completado.**  
+Fases 0 a 9 completadas. 15/15 tests pasando. API CRUD funcional con Swagger, error handling global, CI/CD, y documentación viva.
 
 ## Qué ya está implementado (Fase 1)
 
@@ -99,35 +89,34 @@ Fases 0 a 8 completadas al 100%. 15/15 tests pasando. Proyecto listo para cerrar
 - [x] `ErrorTestController` en tests (via `AddApplicationPart`) para simular errores sin tocar producción
 - [x] `dotnet test` → 15/15 ✅
 
-## Próximas fases
+## Fases del proyecto
 
 | Fase | Estado |
 |---|---|
-| 0 — Fundaciones | ✅ Completada |
-| 1 — Scaffolding | ✅ Completada |
-| 2 — GET /tasks | ✅ Completada |
-| 3 — POST /tasks | ✅ Completada |
-| 4 — PUT /tasks | ✅ Completada |
-| 5 — CI/CD + Linting | ✅ Completada |
-| 6 — DELETE /tasks | ✅ Completada |
-| 7 — Swagger | ✅ Completada |
-| 8 — Error handling | ✅ Completada |
-| 9 — Cierre | 🏗️ En progreso |
+| 0 — Fundaciones | ✅ |
+| 1 — Scaffolding | ✅ |
+| 2 — GET /tasks | ✅ |
+| 3 — POST /tasks | ✅ |
+| 4 — PUT /tasks | ✅ |
+| 5 — CI/CD + Linting | ✅ |
+| 6 — DELETE /tasks | ✅ |
+| 7 — Swagger | ✅ |
+| 8 — Error handling | ✅ |
+| 9 — Cierre | ✅ |
 
 ## Bloqueos
 
 No hay bloqueos técnicos en este momento.
 
-## Última sesión (2026-06-16, sesión 8)
+## Última sesión (2026-06-16, sesión 9)
 
-- se implementó `ExceptionMiddleware` global con try/catch envolviendo el pipeline
-- se mapeó `KeyNotFoundException` → 404 JSON
-- se capturaron errores no controlados → 500 JSON genérico (sin stack trace)
-- se agregó post-procesamiento para respuestas 404 sin cuerpo
-- se registró el middleware al inicio del pipeline
-- se escribieron tests TDD: ruta inexistente → 404 JSON, error interno → 500 sin datos sensibles
-- se documentaron los conceptos en `docs/learning/middleware.md`
-- `dotnet test` → 15/15 ✅
+- Revisión de completitud de todas las fases
+- Revisión y corrección de learning docs (json.md, aspnet-core-project.md, interfaces.md, feature-first.md)
+- README.md reescrito con estado real del proyecto
+- Creación de `docs/_template/README.md` — plantilla genérica de estructura de proyecto
+- Fusión de arquitectura en `docs/index.md`
+- Eliminación de `src/TodoApi.Api/Extensions/` (no usado)
+- Commits finales de cierre y PR #4
 
 ## Resumen final del proyecto
 
@@ -144,5 +133,9 @@ No hay bloqueos técnicos en este momento.
 
 ## Siguiente paso
 
-Fase 9 — Cierre y documentación final (en progreso).  
-Tareas actuales: revisión de completitud, actualización de documentación, y preparación de PR final.
+El proyecto está completo. Próximas extensiones posibles:
+- Base de datos real con Entity Framework Core
+- Paginación en GET /tasks
+- Autenticación JWT
+- Frontend (Blazor, React, etc.)
+- Despliegue (Docker, Azure)

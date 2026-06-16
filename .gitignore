@@ -23,3 +23,6 @@ Thumbs.db
 # .atl cache (local AI tooling)
 .atl/.skill-registry.cache.json
 
+# Project template (not part of the project itself)
+docs/_template/
+
