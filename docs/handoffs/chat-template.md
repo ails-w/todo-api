@@ -1,12 +1,13 @@
 # Handoff — Estado actual del proyecto
 
-> Última actualización: 2026-06-16 — Sesión 8
+> Última actualización: 2026-06-16 — Sesión 9
 
 ## Objetivo actual
 
 ✅ **Fase 8 completada** (Error handling global).  
-🎯 **Próximo objetivo: arrancar Fase 9 — Cierre y documentación final.**  
-La Fase 8 incluyó: `ExceptionMiddleware` global, `KeyNotFoundException` → 404 JSON, errores no controlados → 500 JSON sin stack trace, post-procesamiento de 404 sin cuerpo, tests TDD, 15/15 tests pasando. PR #3 actualizada con Fase 7 + Fase 8.
+🏗️ **Fase 9 — Cierre y documentación final (en progreso).**  
+✅ **Fase 9 completada.**  
+Revisión de completitud, actualización de `docs/project-state.md`, revisión y corrección de 4 learning docs, README reescrito, commits de documentación, y PR final creada. Handoff listo para próxima etapa.
 
 ## Estado actual
 
@@ -63,13 +64,34 @@ La Fase 8 incluyó: `ExceptionMiddleware` global, `KeyNotFoundException` → 404
   - `ErrorTestController` en tests via `AddApplicationPart`
   - `dotnet test` → 15/15 ✅
 
-### 🔄 En progreso
+### ✅ Fase 9 completada
 
-- Nada — Fase 8 completada, Fase 9 lista para arrancar
+- [x] Revisar que todas las fases estén completas (0-8 ✅, 15/15 tests)
+- [x] Actualizar `docs/project-state.md` con resumen final
+- [x] Documentar progreso (`docs/progress/2026-06-16-v2.md`)
+- [x] Revisar y corregir 4 learning docs (`json.md`, `aspnet-core-project.md`, `interfaces.md`, `feature-first.md`)
+- [x] Reescritura de `README.md` con estado real del proyecto
+- [x] Eliminar checklists operacionales no utilizados
+- [x] Commit 1: `docs: finalize project documentation and cleanup (Fase 9)`
+- [x] Commit 2: `docs: update handoff for Phase 9 completion`
+- [x] PR final creada con todos los cambios acumulados
+- [x] Handoff listo para próxima etapa
 
-### ⏳ Próxima tarea
+### Estado final del proyecto
 
-**Fase 9 — Cierre y documentación final.**
+| Aspecto | Detalle |
+|---|---|
+| **API** | REST CRUD completa (GET, POST, PUT, DELETE) + Swagger UI |
+| **Patrones** | Feature-first, Repository, Service, DTOs |
+| **Error handling** | ExceptionMiddleware global con respuestas JSON uniformes |
+| **Tests** | 15/15 — Integración con WebApplicationFactory, TDD |
+| **CI/CD** | GitHub Actions: build + lint + test en push y PR |
+| **Stack** | .NET 10, ASP.NET Core, xUnit, Swashbuckle 10.x |
+| **Documentación** | Arquitectura, learning docs (17 temas), checklists, handoffs |
+
+### Próximo paso
+
+El proyecto queda completo. Si se desea extender: base de datos real (Entity Framework), paginación, autenticación, frontend, etc.
 
 ## Archivos que se deben leer primero
 
