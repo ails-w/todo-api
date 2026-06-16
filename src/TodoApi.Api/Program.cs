@@ -3,6 +3,7 @@ using Microsoft.OpenApi;
 using TodoApi.Api.Features.Tasks.Contracts;
 using TodoApi.Api.Features.Tasks.Services;
 using TodoApi.Api.Infrastructure.InMemory;
+using TodoApi.Api.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,10 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 var app = builder.Build();
+
+// Error handling global — debe ser el primer middleware del pipeline
+// para capturar excepciones de todos los middlewares posteriores.
+app.UseMiddleware<ExceptionMiddleware>();
 
 if (!app.Environment.IsDevelopment())
 {
